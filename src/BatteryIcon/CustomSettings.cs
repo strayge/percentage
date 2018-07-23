@@ -22,6 +22,12 @@ namespace BatteryIcon
             set { SetValueByMethod(MethodBase.GetCurrentMethod(), value); }
         }
 
+        public Color foregroundChargingColor
+        {
+            get { return GetValueByMethod_Color(MethodBase.GetCurrentMethod(), "#FF00FF00"); }
+            set { SetValueByMethod(MethodBase.GetCurrentMethod(), value); }
+        }
+
         public Color backgroundColor
         {
             get { return GetValueByMethod_Color(MethodBase.GetCurrentMethod(), "#00000000"); }

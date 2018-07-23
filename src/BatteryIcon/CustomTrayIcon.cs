@@ -55,14 +55,18 @@ namespace BatteryIcon
             {
                 tooltip = String.Format("{0}%", batteryPercentage);
             }
+
+            Color foregroundColor = settings.foregroundColor;
+
             if (powerStatus.BatteryChargeStatus == BatteryChargeStatus.Charging)
             {
                 tooltip += " (charging)";
+                foregroundColor = settings.foregroundChargingColor;
             }
 
             string iconFont = settings.fontName;
             int iconFontSize = settings.fontSize;
-            Color foregroundColor = settings.foregroundColor;
+            
             Color backgroundColor = settings.backgroundColor;
             Color borderColor = settings.borderColor;
 
