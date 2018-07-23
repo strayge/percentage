@@ -182,6 +182,7 @@
             this.diskColor3Button.TabIndex = 75;
             this.diskColor3Button.Text = "Color";
             this.diskColor3Button.UseVisualStyleBackColor = true;
+            this.diskColor3Button.Click += new System.EventHandler(this.diskColor3Button_Click);
             // 
             // diskColor3Opacity
             // 
@@ -193,6 +194,7 @@
             this.diskColor3Opacity.Size = new System.Drawing.Size(78, 18);
             this.diskColor3Opacity.TabIndex = 77;
             this.diskColor3Opacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.diskColor3Opacity.Scroll += new System.EventHandler(this.diskColor3Opacity_Scroll);
             // 
             // label61
             // 
@@ -253,6 +255,7 @@
             this.diskColor2Button.TabIndex = 75;
             this.diskColor2Button.Text = "Color";
             this.diskColor2Button.UseVisualStyleBackColor = true;
+            this.diskColor2Button.Click += new System.EventHandler(this.diskColor2Button_Click);
             // 
             // diskColor2Opacity
             // 
@@ -264,6 +267,7 @@
             this.diskColor2Opacity.Size = new System.Drawing.Size(78, 18);
             this.diskColor2Opacity.TabIndex = 77;
             this.diskColor2Opacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.diskColor2Opacity.Scroll += new System.EventHandler(this.diskColor2Opacity_Scroll);
             // 
             // label59
             // 
@@ -372,6 +376,7 @@
             this.diskBorderButton.TabIndex = 85;
             this.diskBorderButton.Text = "Color";
             this.diskBorderButton.UseVisualStyleBackColor = true;
+            this.diskBorderButton.Click += new System.EventHandler(this.diskBorderButton_Click);
             // 
             // diskBorderOpacity
             // 
@@ -383,6 +388,7 @@
             this.diskBorderOpacity.Size = new System.Drawing.Size(78, 18);
             this.diskBorderOpacity.TabIndex = 86;
             this.diskBorderOpacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.diskBorderOpacity.Scroll += new System.EventHandler(this.diskBorderOpacity_Scroll);
             // 
             // label51
             // 
@@ -433,6 +439,7 @@
             this.diskBackgroundButton.TabIndex = 76;
             this.diskBackgroundButton.Text = "Color";
             this.diskBackgroundButton.UseVisualStyleBackColor = true;
+            this.diskBackgroundButton.Click += new System.EventHandler(this.diskBackgroundButton_Click);
             // 
             // diskBackgroundOpacity
             // 
@@ -444,6 +451,7 @@
             this.diskBackgroundOpacity.Size = new System.Drawing.Size(78, 18);
             this.diskBackgroundOpacity.TabIndex = 78;
             this.diskBackgroundOpacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.diskBackgroundOpacity.Scroll += new System.EventHandler(this.diskBackgroundOpacity_Scroll);
             // 
             // label53
             // 
@@ -504,6 +512,7 @@
             this.diskColor1Button.TabIndex = 75;
             this.diskColor1Button.Text = "Color";
             this.diskColor1Button.UseVisualStyleBackColor = true;
+            this.diskColor1Button.Click += new System.EventHandler(this.diskColor1Button_Click);
             // 
             // diskColor1Opacity
             // 
@@ -515,6 +524,7 @@
             this.diskColor1Opacity.Size = new System.Drawing.Size(78, 18);
             this.diskColor1Opacity.TabIndex = 77;
             this.diskColor1Opacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.diskColor1Opacity.Scroll += new System.EventHandler(this.diskColor1Opacity_Scroll);
             // 
             // label55
             // 
@@ -590,7 +600,7 @@
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.MaximizeBox = false;
             this.Name = "SettingsForm";
-            this.Text = "Settings";
+            this.Text = "DiskIcon Settings";
             this.panel28.ResumeLayout(false);
             this.panel28.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diskColor3Opacity)).EndInit();

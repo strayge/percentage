@@ -220,6 +220,7 @@
             this.batteryBorderButton.TabIndex = 40;
             this.batteryBorderButton.Text = "Color";
             this.batteryBorderButton.UseVisualStyleBackColor = true;
+            this.batteryBorderButton.Click += new System.EventHandler(this.batteryBorderButton_Click);
             // 
             // batteryBorderOpacity
             // 
@@ -231,6 +232,7 @@
             this.batteryBorderOpacity.Size = new System.Drawing.Size(132, 18);
             this.batteryBorderOpacity.TabIndex = 41;
             this.batteryBorderOpacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.batteryBorderOpacity.Scroll += new System.EventHandler(this.batteryBorderOpacity_Scroll);
             // 
             // label9
             // 
@@ -281,6 +283,7 @@
             this.batteryBackgroundButton.TabIndex = 30;
             this.batteryBackgroundButton.Text = "Color";
             this.batteryBackgroundButton.UseVisualStyleBackColor = true;
+            this.batteryBackgroundButton.Click += new System.EventHandler(this.batteryBackgroundButton_Click);
             // 
             // batteryBackgroundOpacity
             // 
@@ -292,6 +295,7 @@
             this.batteryBackgroundOpacity.Size = new System.Drawing.Size(132, 18);
             this.batteryBackgroundOpacity.TabIndex = 33;
             this.batteryBackgroundOpacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.batteryBackgroundOpacity.Scroll += new System.EventHandler(this.batteryBackgroundOpacity_Scroll);
             // 
             // label12
             // 
@@ -342,6 +346,7 @@
             this.batteryForegroundButton.TabIndex = 29;
             this.batteryForegroundButton.Text = "Color";
             this.batteryForegroundButton.UseVisualStyleBackColor = true;
+            this.batteryForegroundButton.Click += new System.EventHandler(this.batteryForegroundButton_Click);
             // 
             // batteryForegroundOpacity
             // 
@@ -353,6 +358,7 @@
             this.batteryForegroundOpacity.Size = new System.Drawing.Size(132, 18);
             this.batteryForegroundOpacity.TabIndex = 32;
             this.batteryForegroundOpacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.batteryForegroundOpacity.Scroll += new System.EventHandler(this.batteryForegroundOpacity_Scroll);
             // 
             // label13
             // 
@@ -413,6 +419,7 @@
             this.batteryFontButton.TabIndex = 31;
             this.batteryFontButton.Text = "Font";
             this.batteryFontButton.UseVisualStyleBackColor = true;
+            this.batteryFontButton.Click += new System.EventHandler(this.batteryFontButton_Click);
             // 
             // panel6
             // 
@@ -453,6 +460,7 @@
             this.batteryForegroundChargingButton.TabIndex = 29;
             this.batteryForegroundChargingButton.Text = "Color";
             this.batteryForegroundChargingButton.UseVisualStyleBackColor = true;
+            this.batteryForegroundChargingButton.Click += new System.EventHandler(this.batteryForegroundChargingButton_Click);
             // 
             // batteryForegroundChargingOpacity
             // 
@@ -464,6 +472,7 @@
             this.batteryForegroundChargingOpacity.Size = new System.Drawing.Size(132, 18);
             this.batteryForegroundChargingOpacity.TabIndex = 32;
             this.batteryForegroundChargingOpacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.batteryForegroundChargingOpacity.Scroll += new System.EventHandler(this.batteryForegroundChargingOpacity_Scroll);
             // 
             // label2
             // 

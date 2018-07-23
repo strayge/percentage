@@ -211,6 +211,7 @@
             this.ramBorderButton.TabIndex = 85;
             this.ramBorderButton.Text = "Color";
             this.ramBorderButton.UseVisualStyleBackColor = true;
+            this.ramBorderButton.Click += new System.EventHandler(this.ramBorderButton_Click);
             // 
             // ramBorderOpacity
             // 
@@ -222,6 +223,7 @@
             this.ramBorderOpacity.Size = new System.Drawing.Size(132, 18);
             this.ramBorderOpacity.TabIndex = 86;
             this.ramBorderOpacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.ramBorderOpacity.Scroll += new System.EventHandler(this.ramBorderOpacity_Scroll);
             // 
             // label18
             // 
@@ -272,6 +274,7 @@
             this.ramBackgroundButton.TabIndex = 76;
             this.ramBackgroundButton.Text = "Color";
             this.ramBackgroundButton.UseVisualStyleBackColor = true;
+            this.ramBackgroundButton.Click += new System.EventHandler(this.ramBackgroundButton_Click);
             // 
             // ramBackgroundOpacity
             // 
@@ -283,6 +286,7 @@
             this.ramBackgroundOpacity.Size = new System.Drawing.Size(132, 18);
             this.ramBackgroundOpacity.TabIndex = 78;
             this.ramBackgroundOpacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.ramBackgroundOpacity.Scroll += new System.EventHandler(this.ramBackgroundOpacity_Scroll);
             // 
             // label21
             // 
@@ -333,6 +337,7 @@
             this.ramForegroundButton.TabIndex = 75;
             this.ramForegroundButton.Text = "Color";
             this.ramForegroundButton.UseVisualStyleBackColor = true;
+            this.ramForegroundButton.Click += new System.EventHandler(this.ramForegroundButton_Click);
             // 
             // ramForegroundOpacity
             // 
@@ -344,6 +349,7 @@
             this.ramForegroundOpacity.Size = new System.Drawing.Size(132, 18);
             this.ramForegroundOpacity.TabIndex = 77;
             this.ramForegroundOpacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.ramForegroundOpacity.Scroll += new System.EventHandler(this.ramForegroundOpacity_Scroll);
             // 
             // label22
             // 

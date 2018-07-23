@@ -211,6 +211,7 @@
             this.cpuBorderButton.TabIndex = 63;
             this.cpuBorderButton.Text = "Color";
             this.cpuBorderButton.UseVisualStyleBackColor = true;
+            this.cpuBorderButton.Click += new System.EventHandler(this.cpuBorderButton_Click);
             // 
             // cpuBorderOpacity
             // 
@@ -222,6 +223,7 @@
             this.cpuBorderOpacity.Size = new System.Drawing.Size(132, 18);
             this.cpuBorderOpacity.TabIndex = 64;
             this.cpuBorderOpacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.cpuBorderOpacity.Scroll += new System.EventHandler(this.cpuBorderOpacity_Scroll);
             // 
             // label2
             // 
@@ -272,6 +274,7 @@
             this.cpuBackgroundButton.TabIndex = 54;
             this.cpuBackgroundButton.Text = "Color";
             this.cpuBackgroundButton.UseVisualStyleBackColor = true;
+            this.cpuBackgroundButton.Click += new System.EventHandler(this.cpuBackgroundButton_Click);
             // 
             // cpuBackgroundOpacity
             // 
@@ -283,6 +286,7 @@
             this.cpuBackgroundOpacity.Size = new System.Drawing.Size(132, 18);
             this.cpuBackgroundOpacity.TabIndex = 56;
             this.cpuBackgroundOpacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.cpuBackgroundOpacity.Scroll += new System.EventHandler(this.cpuBackgroundOpacity_Scroll);
             // 
             // label5
             // 
@@ -333,6 +337,7 @@
             this.cpuForegroundButton.TabIndex = 53;
             this.cpuForegroundButton.Text = "Color";
             this.cpuForegroundButton.UseVisualStyleBackColor = true;
+            this.cpuForegroundButton.Click += new System.EventHandler(this.cpuForegroundButton_Click);
             // 
             // cpuForegroundOpacity
             // 
@@ -344,6 +349,7 @@
             this.cpuForegroundOpacity.Size = new System.Drawing.Size(132, 18);
             this.cpuForegroundOpacity.TabIndex = 55;
             this.cpuForegroundOpacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.cpuForegroundOpacity.Scroll += new System.EventHandler(this.cpuForegroundOpacity_Scroll);
             // 
             // label6
             // 
@@ -417,7 +423,7 @@
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.MaximizeBox = false;
             this.Name = "SettingsForm";
-            this.Text = "Settings";
+            this.Text = "CpuIcon Settings";
             this.panel10.ResumeLayout(false);
             this.panel10.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cpuInterval)).EndInit();

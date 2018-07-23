@@ -275,6 +275,7 @@
             this.networkBorderButton.TabIndex = 85;
             this.networkBorderButton.Text = "Color";
             this.networkBorderButton.UseVisualStyleBackColor = true;
+            this.networkBorderButton.Click += new System.EventHandler(this.networkBorderButton_Click);
             // 
             // networkBorderOpacity
             // 
@@ -286,6 +287,7 @@
             this.networkBorderOpacity.Size = new System.Drawing.Size(132, 18);
             this.networkBorderOpacity.TabIndex = 86;
             this.networkBorderOpacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.networkBorderOpacity.Scroll += new System.EventHandler(this.networkBorderOpacity_Scroll);
             // 
             // label29
             // 
@@ -336,6 +338,7 @@
             this.networkBackgroundButton.TabIndex = 76;
             this.networkBackgroundButton.Text = "Color";
             this.networkBackgroundButton.UseVisualStyleBackColor = true;
+            this.networkBackgroundButton.Click += new System.EventHandler(this.networkBackgroundButton_Click);
             // 
             // networkBackgroundOpacity
             // 
@@ -347,6 +350,7 @@
             this.networkBackgroundOpacity.Size = new System.Drawing.Size(132, 18);
             this.networkBackgroundOpacity.TabIndex = 78;
             this.networkBackgroundOpacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.networkBackgroundOpacity.Scroll += new System.EventHandler(this.networkBackgroundOpacity_Scroll);
             // 
             // label33
             // 
@@ -397,6 +401,7 @@
             this.networkForegroundButton.TabIndex = 75;
             this.networkForegroundButton.Text = "Color";
             this.networkForegroundButton.UseVisualStyleBackColor = true;
+            this.networkForegroundButton.Click += new System.EventHandler(this.networkForegroundButton_Click);
             // 
             // networkForegroundOpacity
             // 
@@ -408,6 +413,7 @@
             this.networkForegroundOpacity.Size = new System.Drawing.Size(132, 18);
             this.networkForegroundOpacity.TabIndex = 77;
             this.networkForegroundOpacity.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.networkForegroundOpacity.Scroll += new System.EventHandler(this.networkForegroundOpacity_Scroll);
             // 
             // label34
             // 
@@ -482,7 +488,7 @@
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.MaximizeBox = false;
             this.Name = "SettingsForm";
-            this.Text = "Settings";
+            this.Text = "NetIcon Settings";
             this.panel21.ResumeLayout(false);
             this.panel21.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.networkMaxBandwidth)).EndInit();
