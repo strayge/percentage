@@ -70,10 +70,6 @@
             this.diskColor1Button = new System.Windows.Forms.Button();
             this.diskColor1Opacity = new System.Windows.Forms.TrackBar();
             this.label55 = new System.Windows.Forms.Label();
-            this.panel26 = new System.Windows.Forms.Panel();
-            this.label56 = new System.Windows.Forms.Label();
-            this.diskPointWidth = new System.Windows.Forms.ComboBox();
-            this.label57 = new System.Windows.Forms.Label();
             this.panel28.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diskColor3Opacity)).BeginInit();
             this.panel27.SuspendLayout();
@@ -86,7 +82,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.diskBackgroundOpacity)).BeginInit();
             this.panel25.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diskColor1Opacity)).BeginInit();
-            this.panel26.SuspendLayout();
             this.SuspendLayout();
             // 
             // colorDialog
@@ -102,7 +97,7 @@
             // buttonOk
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOk.Location = new System.Drawing.Point(350, 233);
+            this.buttonOk.Location = new System.Drawing.Point(350, 202);
             this.buttonOk.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(104, 29);
@@ -114,7 +109,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.Location = new System.Drawing.Point(242, 233);
+            this.buttonCancel.Location = new System.Drawing.Point(242, 202);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(104, 29);
@@ -127,7 +122,7 @@
             // 
             this.label46.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(13, 240);
+            this.label46.Location = new System.Drawing.Point(13, 209);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(103, 15);
             this.label46.TabIndex = 24;
@@ -141,7 +136,7 @@
             this.panel28.Controls.Add(this.diskColor3Button);
             this.panel28.Controls.Add(this.diskColor3Opacity);
             this.panel28.Controls.Add(this.label61);
-            this.panel28.Location = new System.Drawing.Point(4, 102);
+            this.panel28.Location = new System.Drawing.Point(4, 70);
             this.panel28.Name = "panel28";
             this.panel28.Size = new System.Drawing.Size(450, 32);
             this.panel28.TabIndex = 117;
@@ -214,7 +209,7 @@
             this.panel27.Controls.Add(this.diskColor2Button);
             this.panel27.Controls.Add(this.diskColor2Opacity);
             this.panel27.Controls.Add(this.label59);
-            this.panel27.Location = new System.Drawing.Point(4, 70);
+            this.panel27.Location = new System.Drawing.Point(4, 38);
             this.panel27.Name = "panel27";
             this.panel27.Size = new System.Drawing.Size(450, 32);
             this.panel27.TabIndex = 116;
@@ -284,7 +279,7 @@
             this.panel22.Controls.Add(this.label48);
             this.panel22.Controls.Add(this.diskInterval);
             this.panel22.Controls.Add(this.label49);
-            this.panel22.Location = new System.Drawing.Point(4, 196);
+            this.panel22.Location = new System.Drawing.Point(4, 164);
             this.panel22.Name = "panel22";
             this.panel22.Size = new System.Drawing.Size(450, 32);
             this.panel22.TabIndex = 113;
@@ -344,7 +339,7 @@
             this.panel23.Controls.Add(this.diskBorderButton);
             this.panel23.Controls.Add(this.diskBorderOpacity);
             this.panel23.Controls.Add(this.label51);
-            this.panel23.Location = new System.Drawing.Point(4, 164);
+            this.panel23.Location = new System.Drawing.Point(4, 132);
             this.panel23.Name = "panel23";
             this.panel23.Size = new System.Drawing.Size(450, 32);
             this.panel23.TabIndex = 112;
@@ -407,7 +402,7 @@
             this.panel24.Controls.Add(this.diskBackgroundButton);
             this.panel24.Controls.Add(this.diskBackgroundOpacity);
             this.panel24.Controls.Add(this.label53);
-            this.panel24.Location = new System.Drawing.Point(4, 132);
+            this.panel24.Location = new System.Drawing.Point(4, 100);
             this.panel24.Name = "panel24";
             this.panel24.Size = new System.Drawing.Size(450, 32);
             this.panel24.TabIndex = 111;
@@ -471,7 +466,7 @@
             this.panel25.Controls.Add(this.diskColor1Button);
             this.panel25.Controls.Add(this.diskColor1Opacity);
             this.panel25.Controls.Add(this.label55);
-            this.panel25.Location = new System.Drawing.Point(4, 38);
+            this.panel25.Location = new System.Drawing.Point(4, 6);
             this.panel25.Name = "panel25";
             this.panel25.Size = new System.Drawing.Size(450, 32);
             this.panel25.TabIndex = 110;
@@ -536,62 +531,17 @@
             this.label55.TabIndex = 79;
             this.label55.Text = "Opacity";
             // 
-            // panel26
-            // 
-            this.panel26.Controls.Add(this.label56);
-            this.panel26.Controls.Add(this.diskPointWidth);
-            this.panel26.Controls.Add(this.label57);
-            this.panel26.Location = new System.Drawing.Point(4, 6);
-            this.panel26.Name = "panel26";
-            this.panel26.Size = new System.Drawing.Size(450, 32);
-            this.panel26.TabIndex = 109;
-            // 
-            // label56
-            // 
-            this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(5, 8);
-            this.label56.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(68, 15);
-            this.label56.TabIndex = 69;
-            this.label56.Text = "Point width";
-            // 
-            // diskPointWidth
-            // 
-            this.diskPointWidth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.diskPointWidth.FormattingEnabled = true;
-            this.diskPointWidth.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "4"});
-            this.diskPointWidth.Location = new System.Drawing.Point(98, 4);
-            this.diskPointWidth.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.diskPointWidth.Name = "diskPointWidth";
-            this.diskPointWidth.Size = new System.Drawing.Size(67, 23);
-            this.diskPointWidth.TabIndex = 68;
-            // 
-            // label57
-            // 
-            this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(167, 8);
-            this.label57.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(19, 15);
-            this.label57.TabIndex = 70;
-            this.label57.Text = "px";
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(458, 266);
+            this.ClientSize = new System.Drawing.Size(458, 235);
             this.Controls.Add(this.panel28);
             this.Controls.Add(this.panel27);
             this.Controls.Add(this.panel22);
             this.Controls.Add(this.panel23);
             this.Controls.Add(this.panel24);
             this.Controls.Add(this.panel25);
-            this.Controls.Add(this.panel26);
             this.Controls.Add(this.label46);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
@@ -619,8 +569,6 @@
             this.panel25.ResumeLayout(false);
             this.panel25.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.diskColor1Opacity)).EndInit();
-            this.panel26.ResumeLayout(false);
-            this.panel26.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -670,9 +618,5 @@
         private System.Windows.Forms.Button diskColor1Button;
         private System.Windows.Forms.TrackBar diskColor1Opacity;
         private System.Windows.Forms.Label label55;
-        private System.Windows.Forms.Panel panel26;
-        private System.Windows.Forms.Label label56;
-        private System.Windows.Forms.ComboBox diskPointWidth;
-        private System.Windows.Forms.Label label57;
     }
 }

@@ -70,11 +70,5 @@ namespace DiskIcon
             set { SetValueByMethod(MethodBase.GetCurrentMethod(), value); }
         }
 
-        public int pointWidth
-        {
-            get { return GetValueByMethod(MethodBase.GetCurrentMethod(), 2); }
-            set { SetValueByMethod(MethodBase.GetCurrentMethod(), value); }
-        }
-
     }
 }

@@ -47,6 +47,18 @@ namespace IconLibrary
             return GetSystemMetrics(SM_CXSMICON);
         }
 
+        public int GetWidthOfPoint()
+        {
+            if (GetSmallIconSize() <= 16)
+            {
+                return 1;
+            }
+            else
+            {
+                return 2;
+            }
+        }
+
         public void DisableIcon()
         {
             updateTimer.Stop();

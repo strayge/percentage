@@ -65,7 +65,7 @@ namespace RamIcon
             Color backgroundColor = settings.backgroundColor;
             Color borderColor = settings.borderColor;
 
-            int pointWidth = settings.pointWidth;
+            int pointWidth = GetWidthOfPoint();
 
             int iconSize = GetSmallIconSize();
             using (Bitmap bitmap = new Bitmap(iconSize, iconSize))

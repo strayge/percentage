@@ -55,10 +55,6 @@
             this.cpuForegroundButton = new System.Windows.Forms.Button();
             this.cpuForegroundOpacity = new System.Windows.Forms.TrackBar();
             this.label6 = new System.Windows.Forms.Label();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label44 = new System.Windows.Forms.Label();
-            this.cpuPointWidth = new System.Windows.Forms.ComboBox();
-            this.label45 = new System.Windows.Forms.Label();
             this.panel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cpuInterval)).BeginInit();
             this.panel9.SuspendLayout();
@@ -67,7 +63,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.cpuBackgroundOpacity)).BeginInit();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cpuForegroundOpacity)).BeginInit();
-            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // colorDialog
@@ -83,7 +78,7 @@
             // buttonOk
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOk.Location = new System.Drawing.Point(348, 172);
+            this.buttonOk.Location = new System.Drawing.Point(348, 140);
             this.buttonOk.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(104, 29);
@@ -95,7 +90,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.Location = new System.Drawing.Point(239, 172);
+            this.buttonCancel.Location = new System.Drawing.Point(239, 140);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(104, 29);
@@ -108,7 +103,7 @@
             // 
             this.label46.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(13, 179);
+            this.label46.Location = new System.Drawing.Point(13, 147);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(103, 15);
             this.label46.TabIndex = 24;
@@ -119,7 +114,7 @@
             this.panel10.Controls.Add(this.label4);
             this.panel10.Controls.Add(this.cpuInterval);
             this.panel10.Controls.Add(this.label1);
-            this.panel10.Location = new System.Drawing.Point(2, 133);
+            this.panel10.Location = new System.Drawing.Point(2, 102);
             this.panel10.Name = "panel10";
             this.panel10.Size = new System.Drawing.Size(450, 32);
             this.panel10.TabIndex = 80;
@@ -179,7 +174,7 @@
             this.panel9.Controls.Add(this.cpuBorderButton);
             this.panel9.Controls.Add(this.cpuBorderOpacity);
             this.panel9.Controls.Add(this.label2);
-            this.panel9.Location = new System.Drawing.Point(2, 101);
+            this.panel9.Location = new System.Drawing.Point(2, 70);
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(450, 32);
             this.panel9.TabIndex = 79;
@@ -242,7 +237,7 @@
             this.panel8.Controls.Add(this.cpuBackgroundButton);
             this.panel8.Controls.Add(this.cpuBackgroundOpacity);
             this.panel8.Controls.Add(this.label5);
-            this.panel8.Location = new System.Drawing.Point(2, 69);
+            this.panel8.Location = new System.Drawing.Point(2, 38);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(450, 32);
             this.panel8.TabIndex = 78;
@@ -305,7 +300,7 @@
             this.panel7.Controls.Add(this.cpuForegroundButton);
             this.panel7.Controls.Add(this.cpuForegroundOpacity);
             this.panel7.Controls.Add(this.label6);
-            this.panel7.Location = new System.Drawing.Point(2, 37);
+            this.panel7.Location = new System.Drawing.Point(2, 6);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(450, 32);
             this.panel7.TabIndex = 77;
@@ -361,60 +356,15 @@
             this.label6.TabIndex = 57;
             this.label6.Text = "Opacity";
             // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.label44);
-            this.panel6.Controls.Add(this.cpuPointWidth);
-            this.panel6.Controls.Add(this.label45);
-            this.panel6.Location = new System.Drawing.Point(2, 5);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(450, 32);
-            this.panel6.TabIndex = 76;
-            // 
-            // label44
-            // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(5, 8);
-            this.label44.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(68, 15);
-            this.label44.TabIndex = 47;
-            this.label44.Text = "Point width";
-            // 
-            // cpuPointWidth
-            // 
-            this.cpuPointWidth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cpuPointWidth.FormattingEnabled = true;
-            this.cpuPointWidth.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "4"});
-            this.cpuPointWidth.Location = new System.Drawing.Point(98, 4);
-            this.cpuPointWidth.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.cpuPointWidth.Name = "cpuPointWidth";
-            this.cpuPointWidth.Size = new System.Drawing.Size(67, 23);
-            this.cpuPointWidth.TabIndex = 46;
-            // 
-            // label45
-            // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(167, 8);
-            this.label45.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(19, 15);
-            this.label45.TabIndex = 48;
-            this.label45.Text = "px";
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(455, 205);
+            this.ClientSize = new System.Drawing.Size(455, 173);
             this.Controls.Add(this.panel10);
             this.Controls.Add(this.panel9);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel7);
-            this.Controls.Add(this.panel6);
             this.Controls.Add(this.label46);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
@@ -436,8 +386,6 @@
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cpuForegroundOpacity)).EndInit();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -472,9 +420,5 @@
         private System.Windows.Forms.Button cpuForegroundButton;
         private System.Windows.Forms.TrackBar cpuForegroundOpacity;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.ComboBox cpuPointWidth;
-        private System.Windows.Forms.Label label45;
     }
 }

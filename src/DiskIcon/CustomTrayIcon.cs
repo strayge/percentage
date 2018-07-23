@@ -73,7 +73,7 @@ namespace DiskIcon
             const int borderWidth = 1;
             Color backgroundColor = settings.backgroundColor;
             Color borderColor = settings.borderColor;
-            int pointWidth = settings.pointWidth;
+            int pointWidth = GetWidthOfPoint();
 
             using (Bitmap bitmap = new Bitmap(iconSize, iconSize))
             {

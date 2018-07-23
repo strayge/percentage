@@ -22,7 +22,6 @@ namespace CpuIcon
             // load settings
             // cpu
             settings = CustomSettings.Instance;
-            cpuPointWidth.SelectedIndex = cpuPointWidth.FindStringExact(settings.pointWidth.ToString());
             cpuForegroundText.Text = Utils.ColorToString(settings.foregroundColor);
             cpuForegroundOpacity.Value = settings.foregroundColor.A;
             cpuBackgroundText.Text = Utils.ColorToString(settings.backgroundColor);
@@ -40,8 +39,6 @@ namespace CpuIcon
         private void buttonSave_Click(object sender, EventArgs e)
         {
             // cpu
-            if (cpuPointWidth.SelectedIndex >= 0)
-                settings.pointWidth = Convert.ToInt32(cpuPointWidth.Items[cpuPointWidth.SelectedIndex]);
             settings.foregroundColor = Utils.ColorFromString(cpuForegroundText.Text);
             settings.backgroundColor = Utils.ColorFromString(cpuBackgroundText.Text);
             settings.borderColor = Utils.ColorFromString(cpuBorderText.Text);

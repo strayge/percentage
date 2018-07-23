@@ -55,10 +55,6 @@
             this.ramForegroundButton = new System.Windows.Forms.Button();
             this.ramForegroundOpacity = new System.Windows.Forms.TrackBar();
             this.label22 = new System.Windows.Forms.Label();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.label27 = new System.Windows.Forms.Label();
-            this.ramPointWidth = new System.Windows.Forms.ComboBox();
-            this.label26 = new System.Windows.Forms.Label();
             this.panel15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ramInterval)).BeginInit();
             this.panel14.SuspendLayout();
@@ -67,7 +63,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.ramBackgroundOpacity)).BeginInit();
             this.panel12.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ramForegroundOpacity)).BeginInit();
-            this.panel11.SuspendLayout();
             this.SuspendLayout();
             // 
             // colorDialog
@@ -83,7 +78,7 @@
             // buttonOk
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOk.Location = new System.Drawing.Point(355, 171);
+            this.buttonOk.Location = new System.Drawing.Point(355, 144);
             this.buttonOk.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(104, 28);
@@ -95,7 +90,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.Location = new System.Drawing.Point(247, 171);
+            this.buttonCancel.Location = new System.Drawing.Point(247, 144);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(104, 28);
@@ -108,7 +103,7 @@
             // 
             this.label46.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(13, 178);
+            this.label46.Location = new System.Drawing.Point(13, 151);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(103, 15);
             this.label46.TabIndex = 24;
@@ -119,7 +114,7 @@
             this.panel15.Controls.Add(this.label20);
             this.panel15.Controls.Add(this.ramInterval);
             this.panel15.Controls.Add(this.label17);
-            this.panel15.Location = new System.Drawing.Point(8, 135);
+            this.panel15.Location = new System.Drawing.Point(8, 104);
             this.panel15.Name = "panel15";
             this.panel15.Size = new System.Drawing.Size(450, 31);
             this.panel15.TabIndex = 99;
@@ -179,7 +174,7 @@
             this.panel14.Controls.Add(this.ramBorderButton);
             this.panel14.Controls.Add(this.ramBorderOpacity);
             this.panel14.Controls.Add(this.label18);
-            this.panel14.Location = new System.Drawing.Point(8, 103);
+            this.panel14.Location = new System.Drawing.Point(8, 72);
             this.panel14.Name = "panel14";
             this.panel14.Size = new System.Drawing.Size(450, 31);
             this.panel14.TabIndex = 98;
@@ -242,7 +237,7 @@
             this.panel13.Controls.Add(this.ramBackgroundButton);
             this.panel13.Controls.Add(this.ramBackgroundOpacity);
             this.panel13.Controls.Add(this.label21);
-            this.panel13.Location = new System.Drawing.Point(8, 71);
+            this.panel13.Location = new System.Drawing.Point(8, 40);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(450, 31);
             this.panel13.TabIndex = 97;
@@ -305,7 +300,7 @@
             this.panel12.Controls.Add(this.ramForegroundButton);
             this.panel12.Controls.Add(this.ramForegroundOpacity);
             this.panel12.Controls.Add(this.label22);
-            this.panel12.Location = new System.Drawing.Point(8, 39);
+            this.panel12.Location = new System.Drawing.Point(8, 8);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(450, 31);
             this.panel12.TabIndex = 96;
@@ -361,60 +356,15 @@
             this.label22.TabIndex = 79;
             this.label22.Text = "Opacity";
             // 
-            // panel11
-            // 
-            this.panel11.Controls.Add(this.label27);
-            this.panel11.Controls.Add(this.ramPointWidth);
-            this.panel11.Controls.Add(this.label26);
-            this.panel11.Location = new System.Drawing.Point(8, 7);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(450, 31);
-            this.panel11.TabIndex = 95;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(5, 8);
-            this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(68, 15);
-            this.label27.TabIndex = 69;
-            this.label27.Text = "Point width";
-            // 
-            // ramPointWidth
-            // 
-            this.ramPointWidth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ramPointWidth.FormattingEnabled = true;
-            this.ramPointWidth.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "4"});
-            this.ramPointWidth.Location = new System.Drawing.Point(98, 4);
-            this.ramPointWidth.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.ramPointWidth.Name = "ramPointWidth";
-            this.ramPointWidth.Size = new System.Drawing.Size(67, 23);
-            this.ramPointWidth.TabIndex = 68;
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(167, 8);
-            this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(19, 15);
-            this.label26.TabIndex = 70;
-            this.label26.Text = "px";
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(466, 206);
+            this.ClientSize = new System.Drawing.Size(466, 179);
             this.Controls.Add(this.panel15);
             this.Controls.Add(this.panel14);
             this.Controls.Add(this.panel13);
             this.Controls.Add(this.panel12);
-            this.Controls.Add(this.panel11);
             this.Controls.Add(this.label46);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
@@ -436,8 +386,6 @@
             this.panel12.ResumeLayout(false);
             this.panel12.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ramForegroundOpacity)).EndInit();
-            this.panel11.ResumeLayout(false);
-            this.panel11.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -472,9 +420,5 @@
         private System.Windows.Forms.Button ramForegroundButton;
         private System.Windows.Forms.TrackBar ramForegroundOpacity;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.ComboBox ramPointWidth;
-        private System.Windows.Forms.Label label26;
     }
 }

@@ -84,7 +84,7 @@ namespace NetIcon
             Color backgroundColor = settings.backgroundColor;
             Color borderColor = settings.borderColor;
 
-            int pointWidth = settings.pointWidth;
+            int pointWidth = GetWidthOfPoint();
             int bandwidthMax = settings.maxBandwith;
 
             int iconSize = GetSmallIconSize();

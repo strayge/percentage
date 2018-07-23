@@ -22,7 +22,6 @@ namespace NetIcon
             // load settings
             // network
             settings = CustomSettings.Instance;
-            networkPointWidth.SelectedIndex = networkPointWidth.FindStringExact(settings.pointWidth.ToString());
             networkForegroundText.Text = Utils.ColorToString(settings.foregroundColor);
             networkForegroundOpacity.Value = settings.foregroundColor.A;
             networkBackgroundText.Text = Utils.ColorToString(settings.backgroundColor);
@@ -41,8 +40,6 @@ namespace NetIcon
         private void buttonSave_Click(object sender, EventArgs e)
         {
             // network
-            if (networkPointWidth.SelectedIndex >= 0)
-                settings.pointWidth = Convert.ToInt32(networkPointWidth.Items[networkPointWidth.SelectedIndex]);
             settings.foregroundColor = Utils.ColorFromString(networkForegroundText.Text);
             settings.backgroundColor = Utils.ColorFromString(networkBackgroundText.Text);
             settings.borderColor = Utils.ColorFromString(networkBorderText.Text);

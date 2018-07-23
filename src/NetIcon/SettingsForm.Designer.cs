@@ -59,10 +59,6 @@
             this.networkForegroundButton = new System.Windows.Forms.Button();
             this.networkForegroundOpacity = new System.Windows.Forms.TrackBar();
             this.label34 = new System.Windows.Forms.Label();
-            this.panel16 = new System.Windows.Forms.Panel();
-            this.label38 = new System.Windows.Forms.Label();
-            this.networkPointWidth = new System.Windows.Forms.ComboBox();
-            this.label37 = new System.Windows.Forms.Label();
             this.panel21.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.networkMaxBandwidth)).BeginInit();
             this.panel20.SuspendLayout();
@@ -73,7 +69,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.networkBackgroundOpacity)).BeginInit();
             this.panel17.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.networkForegroundOpacity)).BeginInit();
-            this.panel16.SuspendLayout();
             this.SuspendLayout();
             // 
             // colorDialog
@@ -89,7 +84,7 @@
             // buttonOk
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOk.Location = new System.Drawing.Point(345, 204);
+            this.buttonOk.Location = new System.Drawing.Point(345, 171);
             this.buttonOk.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(104, 29);
@@ -101,7 +96,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.Location = new System.Drawing.Point(236, 204);
+            this.buttonCancel.Location = new System.Drawing.Point(236, 171);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(104, 29);
@@ -114,7 +109,7 @@
             // 
             this.label46.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(13, 211);
+            this.label46.Location = new System.Drawing.Point(13, 178);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(103, 15);
             this.label46.TabIndex = 24;
@@ -125,7 +120,7 @@
             this.panel21.Controls.Add(this.label24);
             this.panel21.Controls.Add(this.networkMaxBandwidth);
             this.panel21.Controls.Add(this.label32);
-            this.panel21.Location = new System.Drawing.Point(-2, 166);
+            this.panel21.Location = new System.Drawing.Point(-2, 133);
             this.panel21.Name = "panel21";
             this.panel21.Size = new System.Drawing.Size(450, 32);
             this.panel21.TabIndex = 104;
@@ -183,7 +178,7 @@
             this.panel20.Controls.Add(this.label31);
             this.panel20.Controls.Add(this.networkInterval);
             this.panel20.Controls.Add(this.label28);
-            this.panel20.Location = new System.Drawing.Point(-2, 134);
+            this.panel20.Location = new System.Drawing.Point(-2, 101);
             this.panel20.Name = "panel20";
             this.panel20.Size = new System.Drawing.Size(450, 32);
             this.panel20.TabIndex = 103;
@@ -243,7 +238,7 @@
             this.panel19.Controls.Add(this.networkBorderButton);
             this.panel19.Controls.Add(this.networkBorderOpacity);
             this.panel19.Controls.Add(this.label29);
-            this.panel19.Location = new System.Drawing.Point(-2, 102);
+            this.panel19.Location = new System.Drawing.Point(-2, 69);
             this.panel19.Name = "panel19";
             this.panel19.Size = new System.Drawing.Size(450, 32);
             this.panel19.TabIndex = 102;
@@ -306,7 +301,7 @@
             this.panel18.Controls.Add(this.networkBackgroundButton);
             this.panel18.Controls.Add(this.networkBackgroundOpacity);
             this.panel18.Controls.Add(this.label33);
-            this.panel18.Location = new System.Drawing.Point(-2, 70);
+            this.panel18.Location = new System.Drawing.Point(-2, 37);
             this.panel18.Name = "panel18";
             this.panel18.Size = new System.Drawing.Size(450, 32);
             this.panel18.TabIndex = 101;
@@ -369,7 +364,7 @@
             this.panel17.Controls.Add(this.networkForegroundButton);
             this.panel17.Controls.Add(this.networkForegroundOpacity);
             this.panel17.Controls.Add(this.label34);
-            this.panel17.Location = new System.Drawing.Point(-2, 38);
+            this.panel17.Location = new System.Drawing.Point(-2, 5);
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(450, 32);
             this.panel17.TabIndex = 100;
@@ -425,61 +420,16 @@
             this.label34.TabIndex = 79;
             this.label34.Text = "Opacity";
             // 
-            // panel16
-            // 
-            this.panel16.Controls.Add(this.label38);
-            this.panel16.Controls.Add(this.networkPointWidth);
-            this.panel16.Controls.Add(this.label37);
-            this.panel16.Location = new System.Drawing.Point(-2, 6);
-            this.panel16.Name = "panel16";
-            this.panel16.Size = new System.Drawing.Size(450, 32);
-            this.panel16.TabIndex = 99;
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(5, 8);
-            this.label38.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(68, 15);
-            this.label38.TabIndex = 69;
-            this.label38.Text = "Point width";
-            // 
-            // networkPointWidth
-            // 
-            this.networkPointWidth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.networkPointWidth.FormattingEnabled = true;
-            this.networkPointWidth.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "4"});
-            this.networkPointWidth.Location = new System.Drawing.Point(98, 4);
-            this.networkPointWidth.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.networkPointWidth.Name = "networkPointWidth";
-            this.networkPointWidth.Size = new System.Drawing.Size(67, 23);
-            this.networkPointWidth.TabIndex = 68;
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(167, 8);
-            this.label37.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(19, 15);
-            this.label37.TabIndex = 70;
-            this.label37.Text = "px";
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(452, 237);
+            this.ClientSize = new System.Drawing.Size(452, 204);
             this.Controls.Add(this.panel21);
             this.Controls.Add(this.panel20);
             this.Controls.Add(this.panel19);
             this.Controls.Add(this.panel18);
             this.Controls.Add(this.panel17);
-            this.Controls.Add(this.panel16);
             this.Controls.Add(this.label46);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
@@ -504,8 +454,6 @@
             this.panel17.ResumeLayout(false);
             this.panel17.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.networkForegroundOpacity)).EndInit();
-            this.panel16.ResumeLayout(false);
-            this.panel16.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -544,9 +492,5 @@
         private System.Windows.Forms.Button networkForegroundButton;
         private System.Windows.Forms.TrackBar networkForegroundOpacity;
         private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.Panel panel16;
-        private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.ComboBox networkPointWidth;
-        private System.Windows.Forms.Label label37;
     }
 }

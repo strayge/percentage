@@ -22,7 +22,6 @@ namespace RamIcon
             // load settings
             // ram
             settings = CustomSettings.Instance;
-            ramPointWidth.SelectedIndex = ramPointWidth.FindStringExact(settings.pointWidth.ToString());
             ramForegroundText.Text = Utils.ColorToString(settings.foregroundColor);
             ramForegroundOpacity.Value = settings.foregroundColor.A;
             ramBackgroundText.Text = Utils.ColorToString(settings.backgroundColor);
@@ -40,8 +39,6 @@ namespace RamIcon
         private void buttonSave_Click(object sender, EventArgs e)
         {
             // ram
-            if (ramPointWidth.SelectedIndex >= 0)
-                settings.pointWidth = Convert.ToInt32(ramPointWidth.Items[ramPointWidth.SelectedIndex]);
             settings.foregroundColor = Utils.ColorFromString(ramForegroundText.Text);
             settings.backgroundColor = Utils.ColorFromString(ramBackgroundText.Text);
             settings.borderColor = Utils.ColorFromString(ramBorderText.Text);

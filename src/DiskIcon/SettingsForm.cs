@@ -25,7 +25,6 @@ namespace DiskIcon
             var availableDisks = CustomTrayIcon.GetDisks();
             availableDisks.Add("");
             availableDisks.Sort();
-            diskPointWidth.SelectedIndex = diskPointWidth.FindStringExact(settings.pointWidth.ToString());
             diskName1.DataSource = new List<string>(availableDisks);
             diskName1.SelectedIndex = diskName1.FindStringExact(settings.name_disk1);
             diskColor1.Text = Utils.ColorToString(settings.foregroundColor_disk1);
@@ -53,8 +52,6 @@ namespace DiskIcon
         private void buttonSave_Click(object sender, EventArgs e)
         {
             // disk
-            if (diskPointWidth.SelectedIndex >= 0)
-                settings.pointWidth = Convert.ToInt32(diskPointWidth.Items[diskPointWidth.SelectedIndex]);
             if (diskName1.SelectedIndex >= 0)
                 settings.name_disk1 = diskName1.Items[diskName1.SelectedIndex].ToString();
             if (diskName2.SelectedIndex >= 0)
