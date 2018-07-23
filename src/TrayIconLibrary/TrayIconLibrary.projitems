@@ -9,6 +9,7 @@
     <Import_RootNamespace>TrayIconLibrary</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Autostart.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CachedStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IniFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />

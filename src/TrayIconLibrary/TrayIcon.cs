@@ -13,16 +13,22 @@ namespace IconLibrary
         private NotifyIcon notifyIcon;
         private Timer updateTimer;
 
+        private MenuItem menuAutostart;
+
         public TrayIcon()
         {
             notifyIcon = new NotifyIcon();
 
             // common menu for all icons
+            menuAutostart = new MenuItem("&Autostart", menuAutostart_Click);
             notifyIcon.ContextMenu = new ContextMenu(new[]
             {
+                menuAutostart,
+                new MenuItem("-"),
                 new MenuItem("&Settings", menuSettings_Click),
                 new MenuItem("E&xit", menuExit_Click),
             });
+            menuAutostart.Checked = Autostart.IsEnabled();
 
             notifyIcon.Visible = true;
 
@@ -142,6 +148,19 @@ namespace IconLibrary
         public virtual void menuSettings_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void menuAutostart_Click(object sender, EventArgs e)
+        {
+            if (menuAutostart.Checked)
+            {
+                Autostart.Disable();
+            }
+            else
+            {
+                Autostart.Enable();
+            }
+            menuAutostart.Checked = Autostart.IsEnabled();
         }
 
     }
