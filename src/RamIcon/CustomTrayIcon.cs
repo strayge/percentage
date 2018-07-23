@@ -48,15 +48,21 @@ namespace RamIcon
             UpdateIcon(null, null);
         }
 
-        public float GetRamLoad()
+        public bool GetRamLoad(out float load, out float available, out float total)
         {
             MEMORYSTATUSEX memoryStatus = new MEMORYSTATUSEX();
             memoryStatus.dwLength = (int)Marshal.SizeOf(typeof(MEMORYSTATUSEX));
+
             if (GlobalMemoryStatusEx(ref memoryStatus))
             {
-                return memoryStatus.dwMemoryLoad;
+                load = memoryStatus.dwMemoryLoad;
+                available = memoryStatus.ullAvailPhys;
+                total = memoryStatus.ullTotalPhys;
+                //return memoryStatus.dwMemoryLoad;
+                return true;
             }
-            return 0;
+            load = available = total = 0;
+            return false;
         }
 
         public override void UpdateIcon(object sender, EventArgs e)
@@ -74,8 +80,9 @@ namespace RamIcon
                 {
                     graphics.Clear(backgroundColor);
 
-                    float newValue = GetRamLoad();
-                    measurents.Add(newValue);
+                    float memLoad, memAvailable, memTotal;
+                    GetRamLoad(out memLoad, out memAvailable, out memTotal);
+                    measurents.Add(memLoad);
                     if (measurents.Count > bitmap.Width / pointWidth)
                     {
                         measurents.RemoveAt(0);
@@ -92,7 +99,7 @@ namespace RamIcon
                     graphics.DrawRectangle(new Pen(borderColor, borderWidth), 0, 0, (int)bitmap.Width - borderWidth, (int)bitmap.Height - borderWidth);
 
                     graphics.Save();
-                    string tooltip = String.Format("RAM: {0:F0}% used", newValue);
+                    string tooltip = String.Format("RAM:\n{1:F1} / {2:F1} GB ({0:F0}%)", memLoad, (memTotal - memAvailable) / 1073741824, memTotal / 1073741824);
                     ChangeIcon(bitmap, tooltip);
                 }
             }
