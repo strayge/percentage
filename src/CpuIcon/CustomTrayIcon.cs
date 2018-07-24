@@ -30,7 +30,8 @@ namespace CpuIcon
         public override void ContextMenuSettings(object sender, EventArgs e)
         {
             new SettingsForm().ShowDialog();
-            // immediatly see changes (works only on current icon)
+            // immediatly see changes
+            SetUpdateInterval(settings.updateInterval);
             UpdateIconTick();
         }
 
