@@ -33,11 +33,11 @@ namespace DiskIcon
             EnableIcon();
         }
 
-        public override void menuSettings_Click(object sender, EventArgs e)
+        public override void ContextMenuSettings(object sender, EventArgs e)
         {
             new SettingsForm().ShowDialog();
             // immediatly see changes (works only on current icon)
-            UpdateIcon(null, null);
+            UpdateIconTick();
         }
 
         public static List<string> GetDisks()
@@ -67,13 +67,13 @@ namespace DiskIcon
             return name;
         }
 
-        public override void UpdateIcon(object sender, EventArgs e)
+        public override void UpdateIconTick(object sender = null, EventArgs e = null)
         {
-            int iconSize = GetSmallIconSize();
+            int iconSize = GetTrayIconsSize();
             const int borderWidth = 1;
             Color backgroundColor = settings.backgroundColor;
             Color borderColor = settings.borderColor;
-            int pointWidth = GetWidthOfPoint();
+            int pointWidth = WidthSingleMeasurement();
 
             using (Bitmap bitmap = new Bitmap(iconSize, iconSize))
             {

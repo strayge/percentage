@@ -2,54 +2,103 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using TrayIconLibrary;
 
 namespace IconLibrary
 {
     class TrayIcon
     {
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        static extern bool DestroyIcon(IntPtr handle);
-
         private NotifyIcon notifyIcon;
-        private Timer updateTimer;
 
-        private MenuItem menuAutostart;
+        // for store state and divide enable/disable clicks
+        MenuItem contextMenuAutostartItem;
 
         public TrayIcon()
         {
             notifyIcon = new NotifyIcon();
+            CreateContextMenu();
 
-            // common menu for all icons
-            menuAutostart = new MenuItem("&Autostart", menuAutostart_Click);
+            updateIconTimer = new Timer();
+            updateIconTimer.Interval = 1000;
+            updateIconTimer.Tick += new EventHandler(UpdateIconTick);
+
+            // icon's tooltip
+            notifyIcon.MouseMove += IconMouseMoveEvent;
+            // balloon tip
+            notifyIcon.MouseClick += IconMouseClickEvent;
+        }
+
+        public void SetUpdateInterval(int interval)
+        {
+            updateIconTimer.Interval = interval;
+        }
+
+        private void CreateContextMenu()
+        {
+            contextMenuAutostartItem = new MenuItem("&Autostart", ContextMenuAutostart)
+            {
+                Checked = Autostart.IsEnabled()
+            };
             notifyIcon.ContextMenu = new ContextMenu(new[]
             {
-                menuAutostart,
+                contextMenuAutostartItem,
                 new MenuItem("-"),
-                new MenuItem("&Settings", menuSettings_Click),
-                new MenuItem("E&xit", menuExit_Click),
+                new MenuItem("&Settings", ContextMenuSettings),
+                new MenuItem("E&xit", ContextMenuExit),
             });
-            menuAutostart.Checked = Autostart.IsEnabled();
+        }
 
+        private void ContextMenuExit(object sender, EventArgs e)
+        {
+            notifyIcon.Visible = false;
+            notifyIcon.Dispose();
+            Application.Exit();
+        }
+
+        // custom form with settings can be showed here
+        public virtual void ContextMenuSettings(object sender, EventArgs e) { }
+
+        private void ContextMenuAutostart(object sender, EventArgs e)
+        {
+            if (contextMenuAutostartItem.Checked)
+            {
+                Autostart.Disable();
+            }
+            else
+            {
+                Autostart.Enable();
+            }
+            contextMenuAutostartItem.Checked = Autostart.IsEnabled();
+        }
+
+        public void DisableIcon()
+        {
+            updateIconTimer.Stop();
+            notifyIcon.Visible = false;
+        }
+
+        public void EnableIcon()
+        {
+            updateIconTimer.Start();
             notifyIcon.Visible = true;
-
-            // prepare update timer
-            updateTimer = new Timer();
-            updateTimer.Tick += new EventHandler(UpdateIcon);
+            UpdateIconTick();
         }
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
-        public static extern int GetSystemMetrics(int nIndex);
-        const int SM_CXSMICON = 49;
+        // for update icon
+        public virtual void UpdateIconTick(object sender = null, EventArgs e = null) { }
 
-        public int GetSmallIconSize()
+        private Timer updateIconTimer;
+
+        protected int GetTrayIconsSize()
         {
-            // get size for tray icons on current system (depends of dpi)
-            return GetSystemMetrics(SM_CXSMICON);
+            // get size for tray icons on current system (depends on DPI)
+            return WinApi.GetSystemMetrics(WinApi.SM_CXSMICON);
         }
 
-        public int GetWidthOfPoint()
+        // depends on DPI
+        public int WidthSingleMeasurement()
         {
-            if (GetSmallIconSize() <= 16)
+            if (GetTrayIconsSize() <= 16)
             {
                 return 1;
             }
@@ -59,120 +108,112 @@ namespace IconLibrary
             }
         }
 
-        public void DisableIcon()
-        {
-            updateTimer.Stop();
-            notifyIcon.Visible = false;
-        }
+        // old icon cached to allow changing only tooltip
+        private Bitmap cachedIconBitmap;
 
-        public void EnableIcon()
+        // update both icon and tooltip
+        public void ChangeIcon(Bitmap bitmap = null, string tooltip = null)
         {
-            updateTimer.Start();
-            notifyIcon.Visible = true;
-            UpdateIcon();
-        }
-
-        public void SetUpdateInterval(int interval)
-        {
-            updateTimer.Interval = interval;
-        }
-
-        public void ChangeIcon(Bitmap bitmap, string tooltip)
-        {
-            System.IntPtr intPtr = bitmap.GetHicon();
-            try
+            if (tooltip != null)
             {
-                using (Icon icon = Icon.FromHandle(intPtr))
+                notifyIcon.Text = tooltip;
+            }
+
+            if (bitmap == null)
+            {
+                bitmap = cachedIconBitmap;
+            }
+            else
+            {
+                if (cachedIconBitmap != null)
                 {
-                    // tooltip should be changed along with icon (while icon not yet destroyed)
+                    WinApi.DestroyIcon(cachedIconBitmap.GetHicon());
+                    cachedIconBitmap.Dispose();
+                }
+                cachedIconBitmap = (Bitmap)bitmap.Clone();
+            }
+
+            if (bitmap != null)
+            {
+                using (Icon icon = Icon.FromHandle(bitmap.GetHicon()))
+                {
                     notifyIcon.Icon = icon;
-                    notifyIcon.Text = tooltip;
-                }
-            }
-            finally
-            {
-                DestroyIcon(intPtr);
-            }
-        }
-
-        protected void DelayedIcon(int position)
-        {
-            // if app contains several icons windows shows it in next order: [1,2,3,4] -> [1,4,3,2]
-            // so caclulate delay from wanted position
-            // need change if increased maximum icons number
-            int minimumDelay = 1000;
-            int delay;
-            if (position <= 1)
-                delay = 1; // without delay (minimum allowed timer interval)
-            else if (position == 2)
-                delay = 4 * minimumDelay;
-            else if (position == 3)
-                delay = 3 * minimumDelay;
-            else if (position == 4)
-                delay = 2 * minimumDelay;
-            else if (position == 5)
-                delay = 1 * minimumDelay;
-            else
-                delay = 1 * minimumDelay; // too large number, mess it with last icon
-            Timer timer = new Timer();
-            timer.Interval = delay;
-            timer.Tick += DelayedIconStart;
-            timer.Start();
-        }
-
-        private void DelayedIconStart(object sender, EventArgs e)
-        {
-            ((Timer)sender).Stop();
-            // show icon
-            UpdateIcon(sender, e);
-            // and start updating
-            updateTimer.Start();
-        }
-
-        //public void ShowIcon()
-        //{
-        //    UpdateIcon();
-        //    updateTimer.Start();
-        //}
-
-        public virtual void UpdateIcon(object sender = null, EventArgs e = null)
-        {
-            // placeholder
-            int iconSize = GetSmallIconSize();
-            using (Bitmap bitmap = new Bitmap(iconSize, iconSize))
-            {
-                using (Graphics graphics = Graphics.FromImage(bitmap))
-                {
-                    graphics.Clear(Color.Red);
-                    graphics.Save();
-                    ChangeIcon(bitmap, "tooltip text");
                 }
             }
         }
 
-        private void menuExit_Click(object sender, EventArgs e)
+        // update only icon
+        public void SetIcon(Bitmap bitmap)
         {
-            notifyIcon.Visible = false;
-            notifyIcon.Dispose();
-            Application.Exit();
+            ChangeIcon(bitmap, null);
         }
 
-        public virtual void menuSettings_Click(object sender, EventArgs e)
+        // update only tooltip
+        public void SetTooltip(string text)
         {
-
+            ChangeIcon(null, text);
         }
 
-        private void menuAutostart_Click(object sender, EventArgs e)
+        // will be executed only after hovering mouse
+        // it allow contains here more heavy calculations
+        // than at each icon updating
+        public virtual void IconHovered() { }
+
+        private DateTime latestTooltipHoverUpdate;
+
+        private void IconMouseMoveEvent(object sender = null, EventArgs e = null)
         {
-            if (menuAutostart.Checked)
+            // fire TooltipHovered event with minimum delay equals 1000 ms
+            if (latestTooltipHoverUpdate == null || (DateTime.UtcNow - latestTooltipHoverUpdate).TotalMilliseconds > 1000)
             {
-                Autostart.Disable();
+                IconHovered();
+                latestTooltipHoverUpdate = DateTime.UtcNow;
             }
-            else
+        }
+
+        // show balloontip on left moube button
+        private void IconMouseClickEvent(object sender, MouseEventArgs e)
+        {
+            if (balloonText != null && e.Button == MouseButtons.Left)
             {
-                Autostart.Enable();
+                ShowBalloon(balloonText, balloonTitle);
             }
-            menuAutostart.Checked = Autostart.IsEnabled();
+        }
+
+        private Timer balloonTimer;
+        private string balloonText;
+        private string balloonTitle;
+
+        // set data for balloontip
+        public void SetBalloon(string text = null, string title = null)
+        {
+            balloonText = text;
+            balloonTitle = title;
+        }
+
+        private void ShowBalloon(string text, string title = null)
+        {
+            if (balloonTimer != null)
+            {
+                return;
+            }
+            balloonTimer = new Timer();
+            balloonTimer.Interval = 2000;
+            balloonTimer.Tick += HideBalloon;
+            balloonTimer.Start();
+            notifyIcon.BalloonTipClosed += HideBalloon;
+            notifyIcon.ShowBalloonTip(2000, title, text, ToolTipIcon.Info);
+        }
+
+        private void HideBalloon(object sender = null, EventArgs e = null)
+        {
+            if (balloonTimer == null)
+            {
+                return;
+            }
+            balloonTimer.Stop();
+            balloonTimer.Dispose();
+            balloonTimer = null;
         }
 
     }

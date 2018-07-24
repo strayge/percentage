@@ -32,7 +32,6 @@
             this.batteryFontDialog = new System.Windows.Forms.FontDialog();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.label46 = new System.Windows.Forms.Label();
             this.panel15 = new System.Windows.Forms.Panel();
             this.label20 = new System.Windows.Forms.Label();
             this.ramInterval = new System.Windows.Forms.NumericUpDown();
@@ -99,16 +98,6 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // label46
-            // 
-            this.label46.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(13, 151);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(103, 15);
-            this.label46.TabIndex = 24;
-            this.label46.Text = "* - required restart";
-            // 
             // panel15
             // 
             this.panel15.Controls.Add(this.label20);
@@ -125,9 +114,9 @@
             this.label20.Location = new System.Drawing.Point(5, 8);
             this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(92, 15);
+            this.label20.Size = new System.Drawing.Size(87, 15);
             this.label20.TabIndex = 82;
-            this.label20.Text = "Update interval*";
+            this.label20.Text = "Update interval";
             // 
             // ramInterval
             // 
@@ -365,7 +354,6 @@
             this.Controls.Add(this.panel14);
             this.Controls.Add(this.panel13);
             this.Controls.Add(this.panel12);
-            this.Controls.Add(this.label46);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOk);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -387,7 +375,6 @@
             this.panel12.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ramForegroundOpacity)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -397,7 +384,6 @@
         private System.Windows.Forms.FontDialog batteryFontDialog;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Label label46;
         private System.Windows.Forms.Panel panel15;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.NumericUpDown ramInterval;

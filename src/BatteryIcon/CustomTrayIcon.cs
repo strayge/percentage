@@ -23,14 +23,14 @@ namespace BatteryIcon
             EnableIcon();
         }
 
-        public override void menuSettings_Click(object sender, EventArgs e)
+        public override void ContextMenuSettings(object sender, EventArgs e)
         {
             new SettingsForm().ShowDialog();
             // immediatly see changes (works only on current icon)
-            UpdateIcon(null, null);
+            UpdateIconTick();
         }
 
-        public override void UpdateIcon(object sender, EventArgs e)
+        public override void UpdateIconTick(object sender = null, EventArgs e = null)
         {
             PowerStatus powerStatus = SystemInformation.PowerStatus;
 
@@ -79,7 +79,7 @@ namespace BatteryIcon
         private Image DrawText(String text, Font font, Color textColor, Color backColor, Color borderColor)
         {
             var textSize = GetImageSize(text, font);
-            int iconSize = GetSmallIconSize();
+            int iconSize = GetTrayIconsSize();
             Image image = new Bitmap(iconSize, iconSize);
             using (Graphics graphics = Graphics.FromImage(image))
             {

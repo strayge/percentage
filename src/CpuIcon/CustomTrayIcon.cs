@@ -27,11 +27,11 @@ namespace CpuIcon
             EnableIcon();
         }
 
-        public override void menuSettings_Click(object sender, EventArgs e)
+        public override void ContextMenuSettings(object sender, EventArgs e)
         {
             new SettingsForm().ShowDialog();
             // immediatly see changes (works only on current icon)
-            UpdateIcon(null, null);
+            UpdateIconTick();
         }
 
         public float GetCpuUsage()
@@ -39,15 +39,15 @@ namespace CpuIcon
             return cpuCounter.NextValue();
         }
 
-        public override void UpdateIcon(object sender, EventArgs e)
+        public override void UpdateIconTick(object sender = null, EventArgs e = null)
         {
             Color foregroundColor = settings.foregroundColor;
             Color backgroundColor = settings.backgroundColor;
             Color borderColor = settings.borderColor;
 
-            int pointWidth = GetWidthOfPoint();
+            int pointWidth = WidthSingleMeasurement();
 
-            int iconSize = GetSmallIconSize();
+            int iconSize = GetTrayIconsSize();
             using (Bitmap bitmap = new Bitmap(iconSize, iconSize))
             {
                 using (Graphics graphics = Graphics.FromImage(bitmap))

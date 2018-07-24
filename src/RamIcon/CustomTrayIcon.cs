@@ -8,28 +8,12 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Diagnostics;
 using IconLibrary;
+using static TrayIconLibrary.WinApi;
 
 namespace RamIcon
 {
     class CustomTrayIcon: TrayIcon
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct MEMORYSTATUSEX
-        {
-            public int dwLength;
-            public int dwMemoryLoad;
-            public ulong ullTotalPhys;
-            public ulong ullAvailPhys;
-            public ulong ullTotalPageFile;
-            public ulong ullAvailPageFile;
-            public ulong ullTotalVirtual;
-            public ulong ullAvailVirtual;
-            public ulong ullAvailExtendedVirtual;
-        }
-
-        [DllImport("Kernel32.dll", SetLastError = true)]
-        public static extern bool GlobalMemoryStatusEx([In, Out] ref MEMORYSTATUSEX lpBuffer);
-
         private CustomSettings settings;
         List<float> measurents = new List<float>();
 
@@ -41,14 +25,15 @@ namespace RamIcon
             EnableIcon();
         }
 
-        public override void menuSettings_Click(object sender, EventArgs e)
+        public override void ContextMenuSettings(object sender, EventArgs e)
         {
             new SettingsForm().ShowDialog();
-            // immediatly see changes (works only on current icon)
-            UpdateIcon(null, null);
+            // immediatly see changes
+            SetUpdateInterval(settings.updateInterval);
+            UpdateIconTick();
         }
 
-        public bool GetRamLoad(out float load, out float available, out float total)
+        private bool GetRamLoad(out float load, out float available, out float total)
         {
             MEMORYSTATUSEX memoryStatus = new MEMORYSTATUSEX();
             memoryStatus.dwLength = (int)Marshal.SizeOf(typeof(MEMORYSTATUSEX));
@@ -58,22 +43,21 @@ namespace RamIcon
                 load = memoryStatus.dwMemoryLoad;
                 available = memoryStatus.ullAvailPhys;
                 total = memoryStatus.ullTotalPhys;
-                //return memoryStatus.dwMemoryLoad;
                 return true;
             }
             load = available = total = 0;
             return false;
         }
 
-        public override void UpdateIcon(object sender, EventArgs e)
+        public override void UpdateIconTick(object sender = null, EventArgs e = null)
         {
             Color foregroundColor = settings.foregroundColor;
             Color backgroundColor = settings.backgroundColor;
             Color borderColor = settings.borderColor;
 
-            int pointWidth = GetWidthOfPoint();
+            int pointWidth = WidthSingleMeasurement();
 
-            int iconSize = GetSmallIconSize();
+            int iconSize = GetTrayIconsSize();
             using (Bitmap bitmap = new Bitmap(iconSize, iconSize))
             {
                 using (Graphics graphics = Graphics.FromImage(bitmap))
@@ -101,8 +85,38 @@ namespace RamIcon
                     graphics.Save();
                     string tooltip = String.Format("RAM:\n{1:F1} / {2:F1} GB ({0:F0}%)", memLoad, (memTotal - memAvailable) / 1073741824, memTotal / 1073741824);
                     ChangeIcon(bitmap, tooltip);
+                    //SetIcon(bitmap);
                 }
             }
+        }
+
+        public override void IconHovered()
+        {
+            float memLoad, memAvailable, memTotal;
+            GetRamLoad(out memLoad, out memAvailable, out memTotal);
+
+            string tooltip = String.Format("RAM:\n{1:F1} / {2:F1} GB ({0:F0}%)", memLoad, (memTotal - memAvailable) / 1073741824, memTotal / 1073741824);
+            SetTooltip(tooltip);
+            SetBalloon(TopMemoryConsumpsionProcesses(), "RamIcon");
+        }
+
+        private string TopMemoryConsumpsionProcesses()
+        {
+            Process[] processes = Process.GetProcesses();
+            Array.Sort<Process>(processes, (x, y) => x.WorkingSet64.CompareTo(y.WorkingSet64));
+            Array.Reverse(processes);
+            string output = "";
+            foreach (Process process in processes)
+            {
+                if ((process.SessionId == 0) && (process.HandleCount == 0))
+                {
+                    // skipping system's "Memory Compression", "Registry" and "Idle" processes
+                    System.Console.WriteLine("skipped " + process.ProcessName);
+                    continue;
+                }
+                output += String.Format("{0,-20}\t{1:N0} MB\n", process.ProcessName, process.WorkingSet64 / 1048576);
+            }
+            return output;
         }
     }
 }
