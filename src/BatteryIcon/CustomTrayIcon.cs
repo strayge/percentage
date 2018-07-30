@@ -36,6 +36,8 @@ namespace BatteryIcon
             PowerStatus powerStatus = SystemInformation.PowerStatus;
 
             string batteryPercentage = (powerStatus.BatteryLifePercent * 100).ToString();
+            bool isCharging = powerStatus.BatteryChargeStatus.HasFlag(BatteryChargeStatus.Charging);
+            bool isConnected = powerStatus.PowerLineStatus.HasFlag(PowerLineStatus.Online);
 
             string tooltip;
             if (powerStatus.BatteryLifeRemaining != -1)
@@ -59,10 +61,14 @@ namespace BatteryIcon
 
             Color foregroundColor = settings.foregroundColor;
 
-            if (powerStatus.BatteryChargeStatus == BatteryChargeStatus.Charging)
+            if (isCharging)
             {
                 tooltip += " (charging)";
                 foregroundColor = settings.foregroundChargingColor;
+            }
+            else if (isConnected)
+            {
+                tooltip += " (plugged in, not charging)";
             }
 
             string iconFont = settings.fontName;
@@ -95,19 +101,35 @@ namespace BatteryIcon
 
                     graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 
+                    float xScale = 1;
+                    float yScale = 1;
+                    int allowedCrop = 1;
                     if (settings.scaling > 0)
                     {
-                        int allowedCrop = 1;
-                        float xScale = (iconSize + 2 * allowedCrop) / textSize.Width;
-                        float yScale = (iconSize + 2 * allowedCrop) / textSize.Height;
+                        if (text.Length == 1)
+                        {
+                            // with defaut size digit shifted to the left
+                            textSize.Width = (float)(textSize.Width * 0.7);
+                            // draw single digit with same width as 2 digits
+                            var textSizeForScale = GetImageSize("99", font);
+                            xScale = (iconSize + 2 * allowedCrop) / textSizeForScale.Width;
+                            yScale = (iconSize + 2 * allowedCrop) / textSizeForScale.Height;
+                        }
+                        else
+                        {
+                            xScale = (iconSize + 2 * allowedCrop) / textSize.Width;
+                            yScale = (iconSize + 2 * allowedCrop) / textSize.Height;
+                        }
                         graphics.ScaleTransform(xScale, yScale);
-                        graphics.DrawString(text, font, textBrush, -allowedCrop, (image.Height + 2 * allowedCrop - textSize.Height * yScale) / 2);
                     }
-                    else
+                    float xPos = (image.Width + 2 * allowedCrop - textSize.Width * xScale) / 2 - allowedCrop;
+                    float yPos = (image.Height + 2 * allowedCrop - textSize.Height * yScale) / 2;
+                    // move "100" to left, because '1' thinner than '0'
+                    if (text.Length == 3)
                     {
-                        graphics.DrawString(text, font, textBrush, (image.Width - textSize.Width) / 2, (image.Height - textSize.Height) / 2);
+                        xPos -= iconSize / 14;
                     }
-
+                    graphics.DrawString(text, font, textBrush, xPos, yPos);
                     graphics.Save();
                 }
             }
