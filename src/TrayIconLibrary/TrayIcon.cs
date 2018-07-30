@@ -127,29 +127,24 @@ namespace IconLibrary
             {
                 if (cachedIconBitmap != null)
                 {
-                    //try
-                    //{
-                    //    WinApi.DestroyIcon(cachedIconBitmap.GetHicon());
-                    //}
-                    //catch { }
                     cachedIconBitmap.Dispose();
                 }
-                
                 cachedIconBitmap = (Bitmap)bitmap.Clone();
             }
 
             if (bitmap != null)
             {
+                System.IntPtr intPtr = bitmap.GetHicon();
                 try
                 {
-                    using (Icon icon = Icon.FromHandle(bitmap.GetHicon()))
+                    using (Icon icon = Icon.FromHandle(intPtr))
                     {
                         notifyIcon.Icon = icon;
                     }
                 }
-                catch (System.Runtime.InteropServices.ExternalException e)
+                finally
                 {
-                    Console.WriteLine("Error in ChangeIcon (System.Runtime.InteropServices.ExternalException)");
+                    WinApi.DestroyIcon(intPtr);
                 }
             }
         }
