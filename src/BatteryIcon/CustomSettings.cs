@@ -30,13 +30,13 @@ namespace BatteryIcon
 
         public Color backgroundColor
         {
-            get { return GetValueByMethod_Color(MethodBase.GetCurrentMethod(), "#00000000"); }
+            get { return GetValueByMethod_Color(MethodBase.GetCurrentMethod(), "#B0525252"); }
             set { SetValueByMethod(MethodBase.GetCurrentMethod(), value); }
         }
 
         public Color borderColor
         {
-            get { return GetValueByMethod_Color(MethodBase.GetCurrentMethod(), "#99FFFFFF"); }
+            get { return GetValueByMethod_Color(MethodBase.GetCurrentMethod(), "#59FFFFFF"); }
             set { SetValueByMethod(MethodBase.GetCurrentMethod(), value); }
         }
 
