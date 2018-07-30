@@ -195,7 +195,6 @@ namespace IconLibrary
         // show balloontip on left moube button
         private void IconMouseClickEvent(object sender, MouseEventArgs e)
         {
-            //Console.WriteLine("single");
             if (e.Button == MouseButtons.Left)
             {
                 // check time from latest double click
@@ -214,7 +213,6 @@ namespace IconLibrary
                 timerForWaitDoubleClick.Tick += (s, a) =>
                 {
                     IconMouseClickAction();
-                    //Console.WriteLine("single action");
                     timerForWaitDoubleClick.Stop();
                 };
                 timerForWaitDoubleClick.Start();
@@ -223,17 +221,16 @@ namespace IconLibrary
 
         private void IconMouseDoubleClickEvent(object sender, MouseEventArgs e)
         {
-            //Console.WriteLine("double");
             if (timerForWaitDoubleClick != null)
             {
                 timerForWaitDoubleClick.Stop();
                 // set time to prevent fire event on second click
                 timerForWaitDoubleClick.Tag = System.Environment.TickCount;
             }
-            //Console.WriteLine("double action");
             IconMouseDoubleClickAction();
         }
 
+        // default actions
         public virtual void IconMouseClickAction()
         {
             if (balloonText != null)

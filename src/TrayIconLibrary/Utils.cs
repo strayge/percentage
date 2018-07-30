@@ -26,7 +26,7 @@ namespace IconLibrary
             return (long)(DateTime.UtcNow - UnixEpoch).TotalMilliseconds;
         }
 
-        public static void StartProgram(string path, string args)
+        public static void StartProgram(string path, string args = "")
         {
             ProcessStartInfo startInfo = new ProcessStartInfo();
             //startInfo.CreateNoWindow = false;

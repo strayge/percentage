@@ -24,13 +24,8 @@ namespace CpuIcon
 
             cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
 
-            // first call very long, so do it at startup
-            GetCpuTopProcesses();
-
             SetUpdateInterval(settings.updateInterval);
             EnableIcon();
-
-            //tooltipHoverMinimumDelay = 5000;
         }
 
         public override void ContextMenuSettings(object sender, EventArgs e)
@@ -87,13 +82,6 @@ namespace CpuIcon
 
         public override void IconHovered()
         {
-            //string output = "";
-            //foreach (var item in GetCpuTopProcesses())
-            //{
-            //    output += String.Format("{0,-30}\t{1:F1}%\n", item.Item1, item.Item2);
-            //}
-            //Console.WriteLine(output);
-            //SetBalloon(output, "CpuIcon");
         }
 
         void CalcAndShowBaloonInBackground()
@@ -115,14 +103,11 @@ namespace CpuIcon
 
         public override void IconMouseDoubleClickAction()
         {
-            Console.WriteLine("double " + Utils.UtcNowMilliseconds().ToString());
-            Task.Run( () => Utils.StartProgram("perfmon.exe", "/res") );
+            Task.Run( () => Utils.StartProgram("taskmgr.exe") );
         }
 
         public override void IconMouseClickAction()
         {
-            Console.WriteLine("single" + Utils.UtcNowMilliseconds().ToString());
-            Console.WriteLine("overrided IconMouseClickEvent");
             Task task = Task.Run((Action)CalcAndShowBaloonInBackground);
         }
 
@@ -138,16 +123,7 @@ namespace CpuIcon
             string query = String.Format("SELECT * FROM Win32_PerfFormattedData_PerfProc_Process WHERE PercentProcessorTime > {0}", cpuTreshhold);
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", query);
 
-            Console.WriteLine("    GetCpuTopProcesses searcher runned for {0} ms from start", Utils.UtcNowMilliseconds() - startTime);
-
             var queryResult = searcher.Get();
-
-            Console.WriteLine("    GetCpuTopProcesses searcher.Get runned for {0} ms from start", Utils.UtcNowMilliseconds() - startTime);
-
-            Console.WriteLine("    GetCpuTopProcesses queryResult.Count: {0}", queryResult.Count);
-
-            Console.WriteLine("    GetCpuTopProcesses queryResult.Count runned for {0} ms from start", Utils.UtcNowMilliseconds() - startTime);
-
             foreach (ManagementObject queryObj in queryResult)
             {
                 //Console.WriteLine("    GetCpuTopProcesses foreach iteration runned for {0} ms from start", Utils.UtcNowMilliseconds() - startTime);
@@ -168,9 +144,6 @@ namespace CpuIcon
                     list.Add(Tuple.Create(name, percent));
                 }
             }
-
-            Console.WriteLine("    GetCpuTopProcesses foreach runned for {0} ms from start", Utils.UtcNowMilliseconds() - startTime);
-
             list.Sort((x, y) => -1 * x.Item2.CompareTo(y.Item2));
             Console.WriteLine("GetCpuTopProcesses runned for {0} ms", Utils.UtcNowMilliseconds() - startTime);
             return list;
