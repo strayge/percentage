@@ -114,11 +114,7 @@ namespace IconLibrary
         // update both icon and tooltip
         public void ChangeIcon(Bitmap bitmap = null, string tooltip = null)
         {
-            if (tooltip != null)
-            {
-                notifyIcon.Text = tooltip;
-            }
-
+            // always get bitmap for set
             if (bitmap == null)
             {
                 bitmap = cachedIconBitmap;
@@ -131,21 +127,28 @@ namespace IconLibrary
                 }
                 cachedIconBitmap = (Bitmap)bitmap.Clone();
             }
-
-            if (bitmap != null)
+            if (bitmap == null)
             {
-                System.IntPtr intPtr = bitmap.GetHicon();
-                try
+                return;
+            }
+
+            System.IntPtr intPtr = bitmap.GetHicon();
+            try
+            {
+                using (Icon icon = Icon.FromHandle(intPtr))
                 {
-                    using (Icon icon = Icon.FromHandle(intPtr))
+                    notifyIcon.Icon = icon;
+
+                    // changing tooltip only while valid icon handler
+                    if (tooltip != null)
                     {
-                        notifyIcon.Icon = icon;
+                        notifyIcon.Text = tooltip;
                     }
                 }
-                finally
-                {
-                    WinApi.DestroyIcon(intPtr);
-                }
+            }
+            finally
+            {
+                WinApi.DestroyIcon(intPtr);
             }
         }
 
