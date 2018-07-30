@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Diagnostics;
 using IconLibrary;
+using System.Management;
 
 namespace CpuIcon
 {
@@ -23,8 +24,13 @@ namespace CpuIcon
 
             cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
 
+            // first call very long, so do it at startup
+            GetCpuTopProcesses();
+
             SetUpdateInterval(settings.updateInterval);
             EnableIcon();
+
+            //tooltipHoverMinimumDelay = 5000;
         }
 
         public override void ContextMenuSettings(object sender, EventArgs e)
@@ -78,5 +84,93 @@ namespace CpuIcon
                 }
             }
         }
+
+        public override void IconHovered()
+        {
+            //string output = "";
+            //foreach (var item in GetCpuTopProcesses())
+            //{
+            //    output += String.Format("{0,-30}\t{1:F1}%\n", item.Item1, item.Item2);
+            //}
+            //Console.WriteLine(output);
+            //SetBalloon(output, "CpuIcon");
+        }
+
+        void CalcAndShowBaloonInBackground()
+        {
+            string output = "";
+            foreach (var item in GetCpuTopProcesses())
+            {
+                output += String.Format("{0,-30}\t{1:F1}%\n", item.Item1, item.Item2);
+            }
+            if (output == "")
+            {
+                output = "No processes with usage > 3%";
+            }
+            Console.WriteLine(output);
+            SetBalloon(output, "CpuIcon");
+
+            ShowBalloon(balloonText, balloonTitle);
+        }
+
+        protected override void IconMouseClickEvent(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Console.WriteLine("overrided IconMouseClickEvent");
+                Task task = Task.Run((Action)CalcAndShowBaloonInBackground);
+            }
+        }
+
+        static List<Tuple<string, float>> GetCpuTopProcesses()
+        {
+            long startTime = Utils.UtcNowMilliseconds();
+            List<Tuple<string, float>> list = new List<Tuple<string, float>>();
+
+            int cpuCoresCount = Environment.ProcessorCount;
+
+            // used threshold for significantly increase query time
+            int cpuTreshhold = 3 * cpuCoresCount;
+            string query = String.Format("SELECT * FROM Win32_PerfFormattedData_PerfProc_Process WHERE PercentProcessorTime > {0}", cpuTreshhold);
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2", query);
+
+            Console.WriteLine("    GetCpuTopProcesses searcher runned for {0} ms from start", Utils.UtcNowMilliseconds() - startTime);
+
+            var queryResult = searcher.Get();
+
+            Console.WriteLine("    GetCpuTopProcesses searcher.Get runned for {0} ms from start", Utils.UtcNowMilliseconds() - startTime);
+
+            Console.WriteLine("    GetCpuTopProcesses queryResult.Count: {0}", queryResult.Count);
+
+            Console.WriteLine("    GetCpuTopProcesses queryResult.Count runned for {0} ms from start", Utils.UtcNowMilliseconds() - startTime);
+
+            foreach (ManagementObject queryObj in queryResult)
+            {
+                //Console.WriteLine("    GetCpuTopProcesses foreach iteration runned for {0} ms from start", Utils.UtcNowMilliseconds() - startTime);
+                string name = queryObj["Name"].ToString();
+                string processId = queryObj["IDProcess"].ToString();
+                name = String.Format("{0} ({1})", name.Split('#')[0], processId);
+                float.TryParse(queryObj["PercentProcessorTime"].ToString(), out float percent);
+                percent /= cpuCoresCount;
+
+                // skip Idle
+                if (processId == "0")
+                {
+                    continue;
+                }
+
+                if (percent != 0)
+                {
+                    list.Add(Tuple.Create(name, percent));
+                }
+            }
+
+            Console.WriteLine("    GetCpuTopProcesses foreach runned for {0} ms from start", Utils.UtcNowMilliseconds() - startTime);
+
+            list.Sort((x, y) => -1 * x.Item2.CompareTo(y.Item2));
+            Console.WriteLine("GetCpuTopProcesses runned for {0} ms", Utils.UtcNowMilliseconds() - startTime);
+            return list;
+        }
+
     }
 }

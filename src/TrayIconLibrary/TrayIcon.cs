@@ -19,7 +19,7 @@ namespace IconLibrary
             CreateContextMenu();
 
             updateIconTimer = new Timer();
-            updateIconTimer.Interval = 1000;
+            updateIconTimer.Interval = 100;
             updateIconTimer.Tick += new EventHandler(UpdateIconTick);
 
             // icon's tooltip
@@ -127,17 +127,29 @@ namespace IconLibrary
             {
                 if (cachedIconBitmap != null)
                 {
-                    WinApi.DestroyIcon(cachedIconBitmap.GetHicon());
+                    //try
+                    //{
+                    //    WinApi.DestroyIcon(cachedIconBitmap.GetHicon());
+                    //}
+                    //catch { }
                     cachedIconBitmap.Dispose();
                 }
+                
                 cachedIconBitmap = (Bitmap)bitmap.Clone();
             }
 
             if (bitmap != null)
             {
-                using (Icon icon = Icon.FromHandle(bitmap.GetHicon()))
+                try
                 {
-                    notifyIcon.Icon = icon;
+                    using (Icon icon = Icon.FromHandle(bitmap.GetHicon()))
+                    {
+                        notifyIcon.Icon = icon;
+                    }
+                }
+                catch (System.Runtime.InteropServices.ExternalException e)
+                {
+                    Console.WriteLine("Error in ChangeIcon (System.Runtime.InteropServices.ExternalException)");
                 }
             }
         }
@@ -159,20 +171,27 @@ namespace IconLibrary
         // than at each icon updating
         public virtual void IconHovered() { }
 
-        private DateTime latestTooltipHoverUpdate;
+        private long latestTooltipHoverUpdate;
+
+        protected int tooltipHoverMinimumDelay = 1000;
 
         private void IconMouseMoveEvent(object sender = null, EventArgs e = null)
         {
+            long now = Utils.UtcNowMilliseconds();
             // fire TooltipHovered event with minimum delay equals 1000 ms
-            if (latestTooltipHoverUpdate == null || (DateTime.UtcNow - latestTooltipHoverUpdate).TotalMilliseconds > 1000)
+            if ((now - latestTooltipHoverUpdate) > tooltipHoverMinimumDelay)
             {
+                // update timestamp immedialty to prevent several calculation at same time
+                latestTooltipHoverUpdate = now + 10000;
+                    
                 IconHovered();
-                latestTooltipHoverUpdate = DateTime.UtcNow;
+                // calculate time delta from end of calculation
+                latestTooltipHoverUpdate = now;
             }
         }
 
         // show balloontip on left moube button
-        private void IconMouseClickEvent(object sender, MouseEventArgs e)
+        protected virtual void IconMouseClickEvent(object sender, MouseEventArgs e)
         {
             if (balloonText != null && e.Button == MouseButtons.Left)
             {
@@ -181,8 +200,8 @@ namespace IconLibrary
         }
 
         private Timer balloonTimer;
-        private string balloonText;
-        private string balloonTitle;
+        protected string balloonText;
+        protected string balloonTitle;
 
         // set data for balloontip
         public void SetBalloon(string text = null, string title = null)
@@ -191,7 +210,7 @@ namespace IconLibrary
             balloonTitle = title;
         }
 
-        private void ShowBalloon(string text, string title = null)
+        protected void ShowBalloon(string text, string title = null)
         {
             if (balloonTimer != null)
             {

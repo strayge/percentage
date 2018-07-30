@@ -106,7 +106,7 @@ namespace RamIcon
             Array.Sort<Process>(processes, (x, y) => x.WorkingSet64.CompareTo(y.WorkingSet64));
             Array.Reverse(processes);
             string output = "";
-            foreach (Process process in processes)
+            foreach (Process process in processes.Take(5))
             {
                 if ((process.SessionId == 0) && (process.HandleCount == 0))
                 {
@@ -114,7 +114,8 @@ namespace RamIcon
                     System.Console.WriteLine("skipped " + process.ProcessName);
                     continue;
                 }
-                output += String.Format("{0,-20}\t{1:N0} MB\n", process.ProcessName, process.WorkingSet64 / 1048576);
+                string processLine = String.Format("{0} ({1})", process.ProcessName, process.Id);
+                output += String.Format("{0,-25}\t{1:N0} MB\n", processLine, process.WorkingSet64 / 1048576);
             }
             return output;
         }
