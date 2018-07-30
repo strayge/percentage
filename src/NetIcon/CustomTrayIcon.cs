@@ -14,7 +14,7 @@ namespace NetIcon
     class CustomTrayIcon: TrayIcon
     {
         private CustomSettings settings;
-        List<float> measurents = new List<float>();
+        List<float> measurementsPercents = new List<float>();
         List<PerformanceCounter> counters = new List<PerformanceCounter>();
 
         public CustomTrayIcon()
@@ -39,6 +39,11 @@ namespace NetIcon
             // immediatly see changes
             SetUpdateInterval(settings.updateInterval);
             UpdateIconTick();
+        }
+
+        public override void IconMouseDoubleClickAction()
+        {
+            Task.Run(() => Utils.StartProgram("perfmon.exe", "/res"));
         }
 
         private void CheckNICList(object sender, EventArgs e)
@@ -86,7 +91,7 @@ namespace NetIcon
             Color borderColor = settings.borderColor;
 
             int pointWidth = WidthSingleMeasurement();
-            int bandwidthMax = settings.maxBandwith;
+            int bandwidthMaxMbit = settings.maxBandwithBitPerSecond / 1024 / 1024;
 
             int iconSize = GetTrayIconsSize();
             using (Bitmap bitmap = new Bitmap(iconSize, iconSize))
@@ -95,17 +100,17 @@ namespace NetIcon
                 {
                     graphics.Clear(backgroundColor);
 
-                    float newValue = GetNetworkLoad();
-                    measurents.Add(100 * newValue / bandwidthMax);
-                    if (measurents.Count > bitmap.Width / pointWidth)
+                    float newValueMbit = GetNetworkLoad() * 8 / 1024 / 1024;
+                    measurementsPercents.Add(100 * newValueMbit / bandwidthMaxMbit);
+                    if (measurementsPercents.Count > bitmap.Width / pointWidth)
                     {
-                        measurents.RemoveAt(0);
+                        measurementsPercents.RemoveAt(0);
                     }
 
-                    for (int i = measurents.Count - 1; i >= 0; i--)
+                    for (int i = measurementsPercents.Count - 1; i >= 0; i--)
                     {
-                        float value = measurents[i];
-                        var pos = bitmap.Width - (measurents.Count - 1 - i) * pointWidth;
+                        float value = measurementsPercents[i];
+                        var pos = bitmap.Width - (measurementsPercents.Count - 1 - i) * pointWidth;
                         graphics.DrawLine(new Pen(foregroundColor, pointWidth), pos, bitmap.Height, pos, bitmap.Height - bitmap.Height * value / 100);
                     }
 
@@ -113,8 +118,9 @@ namespace NetIcon
                     graphics.DrawRectangle(new Pen(borderColor, borderWidth), 0, 0, (int)bitmap.Width - borderWidth, (int)bitmap.Height - borderWidth);
 
                     graphics.Save();
-                    float averageBandwith = measurents.Average() * bandwidthMax / 100;
-                    string tooltip = String.Format("Network ({0} adapters): {1:F0} Kbit/s\nAvg: {2:F0} Kbit/s", counters.Count, newValue / 1024 * 8, averageBandwith / 1024 * 8);
+                    float averageBandwithMbit = measurementsPercents.Average() * bandwidthMaxMbit / 100;
+                    int averageTime = measurementsPercents.Count * settings.updateInterval / 1000;
+                    string tooltip = String.Format("Network\nCurrent: {0:F0} Mbit/s\nAvg ({2}s): {1:F0} Mbit/s", newValueMbit, averageBandwithMbit, averageTime);
                     ChangeIcon(bitmap, tooltip);
                 }
             }
