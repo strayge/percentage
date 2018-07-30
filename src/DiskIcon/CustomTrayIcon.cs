@@ -41,6 +41,11 @@ namespace DiskIcon
             UpdateIconTick();
         }
 
+        public override void IconMouseDoubleClickAction()
+        {
+            Task.Run(() => Utils.StartProgram("perfmon.exe", "/res"));
+        }
+
         public static List<string> GetDisks()
         {
             var result = new List<string>();
