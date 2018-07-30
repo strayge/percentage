@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 
 
@@ -25,5 +26,15 @@ namespace IconLibrary
             return (long)(DateTime.UtcNow - UnixEpoch).TotalMilliseconds;
         }
 
+        public static void StartProgram(string path, string args)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo();
+            //startInfo.CreateNoWindow = false;
+            startInfo.UseShellExecute = true;
+            startInfo.FileName = path;
+            //startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            startInfo.Arguments = args;
+            Process exeProcess = Process.Start(startInfo);
+        }
     }
 }

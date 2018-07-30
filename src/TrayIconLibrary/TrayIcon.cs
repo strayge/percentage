@@ -26,6 +26,8 @@ namespace IconLibrary
             notifyIcon.MouseMove += IconMouseMoveEvent;
             // balloon tip
             notifyIcon.MouseClick += IconMouseClickEvent;
+
+            notifyIcon.MouseDoubleClick += IconMouseDoubleClickEvent;
         }
 
         public void SetUpdateInterval(int interval)
@@ -188,14 +190,59 @@ namespace IconLibrary
             }
         }
 
+        private Timer timerForWaitDoubleClick;
+
         // show balloontip on left moube button
-        protected virtual void IconMouseClickEvent(object sender, MouseEventArgs e)
+        private void IconMouseClickEvent(object sender, MouseEventArgs e)
         {
-            if (balloonText != null && e.Button == MouseButtons.Left)
+            //Console.WriteLine("single");
+            if (e.Button == MouseButtons.Left)
+            {
+                // check time from latest double click
+                if (timerForWaitDoubleClick != null)
+                {
+                    int latestDoubleClick = (int)timerForWaitDoubleClick.Tag;
+                    int now = System.Environment.TickCount;
+                    if ((now - latestDoubleClick) < SystemInformation.DoubleClickTime)
+                    {
+                        return;
+                    }
+                }
+                timerForWaitDoubleClick = new Timer();
+                timerForWaitDoubleClick.Interval = SystemInformation.DoubleClickTime;
+                timerForWaitDoubleClick.Tag = 0; // double click timing
+                timerForWaitDoubleClick.Tick += (s, a) =>
+                {
+                    IconMouseClickAction();
+                    //Console.WriteLine("single action");
+                    timerForWaitDoubleClick.Stop();
+                };
+                timerForWaitDoubleClick.Start();
+            }
+        }
+
+        private void IconMouseDoubleClickEvent(object sender, MouseEventArgs e)
+        {
+            //Console.WriteLine("double");
+            if (timerForWaitDoubleClick != null)
+            {
+                timerForWaitDoubleClick.Stop();
+                // set time to prevent fire event on second click
+                timerForWaitDoubleClick.Tag = System.Environment.TickCount;
+            }
+            //Console.WriteLine("double action");
+            IconMouseDoubleClickAction();
+        }
+
+        public virtual void IconMouseClickAction()
+        {
+            if (balloonText != null)
             {
                 ShowBalloon(balloonText, balloonTitle);
             }
         }
+
+        public virtual void IconMouseDoubleClickAction() { }
 
         private Timer balloonTimer;
         protected string balloonText;

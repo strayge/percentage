@@ -113,13 +113,17 @@ namespace CpuIcon
             ShowBalloon(balloonText, balloonTitle);
         }
 
-        protected override void IconMouseClickEvent(object sender, MouseEventArgs e)
+        public override void IconMouseDoubleClickAction()
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                Console.WriteLine("overrided IconMouseClickEvent");
-                Task task = Task.Run((Action)CalcAndShowBaloonInBackground);
-            }
+            Console.WriteLine("double " + Utils.UtcNowMilliseconds().ToString());
+            Task.Run( () => Utils.StartProgram("perfmon.exe", "/res") );
+        }
+
+        public override void IconMouseClickAction()
+        {
+            Console.WriteLine("single" + Utils.UtcNowMilliseconds().ToString());
+            Console.WriteLine("overrided IconMouseClickEvent");
+            Task task = Task.Run((Action)CalcAndShowBaloonInBackground);
         }
 
         static List<Tuple<string, float>> GetCpuTopProcesses()
