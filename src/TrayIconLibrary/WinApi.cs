@@ -43,6 +43,14 @@ namespace TrayIconLibrary
 
         [DllImport("kernel32")]
         public static extern int GetPrivateProfileString(string Section, string Key, string Default, StringBuilder RetVal, int Size, string FilePath);
+
+        // for clock counter
+
+        [DllImport("Kernel32.dll")]
+        public static extern bool QueryPerformanceCounter(out long lpPerformanceCount);
+
+        [DllImport("Kernel32.dll")]
+        public static extern bool QueryPerformanceFrequency(out long lpFrequency);
     }
 
 }

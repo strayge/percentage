@@ -24,6 +24,8 @@ namespace CpuIcon
             settings = CustomSettings.Instance;
             cpuForegroundText.Text = Utils.ColorToString(settings.foregroundColor);
             cpuForegroundOpacity.Value = settings.foregroundColor.A;
+            cpuForegroundThrottlingText.Text = Utils.ColorToString(settings.foregroundThrottlingColor);
+            cpuForegroundThrottlingOpacity.Value = settings.foregroundThrottlingColor.A;
             cpuBackgroundText.Text = Utils.ColorToString(settings.backgroundColor);
             cpuBackgroundOpacity.Value = settings.backgroundColor.A;
             cpuBorderText.Text = Utils.ColorToString(settings.borderColor);
@@ -40,6 +42,7 @@ namespace CpuIcon
         {
             // cpu
             settings.foregroundColor = Utils.ColorFromString(cpuForegroundText.Text);
+            settings.foregroundThrottlingColor = Utils.ColorFromString(cpuForegroundThrottlingText.Text);
             settings.backgroundColor = Utils.ColorFromString(cpuBackgroundText.Text);
             settings.borderColor = Utils.ColorFromString(cpuBorderText.Text);
             settings.updateInterval = (int)cpuInterval.Value;
@@ -54,6 +57,14 @@ namespace CpuIcon
             colorDialog.ShowDialog();
             Color color = Color.FromArgb(cpuForegroundOpacity.Value, colorDialog.Color.R, colorDialog.Color.G, colorDialog.Color.B);
             cpuForegroundText.Text = Utils.ColorToString(color);
+        }
+
+        private void cpuForegroundThrottlingButton_Click(object sender, EventArgs e)
+        {
+            colorDialog.Color = Utils.ColorFromString(cpuForegroundThrottlingText.Text);
+            colorDialog.ShowDialog();
+            Color color = Color.FromArgb(cpuForegroundThrottlingOpacity.Value, colorDialog.Color.R, colorDialog.Color.G, colorDialog.Color.B);
+            cpuForegroundThrottlingText.Text = Utils.ColorToString(color);
         }
 
         private void cpuBackgroundButton_Click(object sender, EventArgs e)
@@ -77,6 +88,13 @@ namespace CpuIcon
             Color color = Utils.ColorFromString(cpuForegroundText.Text);
             Color color2 = Color.FromArgb(cpuForegroundOpacity.Value, color.R, color.G, color.B);
             cpuForegroundText.Text = Utils.ColorToString(color2);
+        }
+
+        private void cpuForegroundThrottlingOpacity_Scroll(object sender, EventArgs e)
+        {
+            Color color = Utils.ColorFromString(cpuForegroundThrottlingText.Text);
+            Color color2 = Color.FromArgb(cpuForegroundThrottlingOpacity.Value, color.R, color.G, color.B);
+            cpuForegroundThrottlingText.Text = Utils.ColorToString(color2);
         }
 
         private void cpuBackgroundOpacity_Scroll(object sender, EventArgs e)
