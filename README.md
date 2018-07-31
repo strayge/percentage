@@ -1,7 +1,6 @@
 # Tray Monitor
 
-![](https://raw.githubusercontent.com/strayge/tray-monitor/master/screenshot.png)
-(screenshot outdated)
+<img src="https://raw.githubusercontent.com/strayge/tray-monitor/master/screenshot.png" width="443">
 
 See your system's loading in tray.  
 Different icons for:  
@@ -15,7 +14,7 @@ Different icons for:
 
 * [Download the latest release](https://github.com/strayge/tray-monitor/releases)
 * Put `percentage.exe` in your startup folder
-  * To get to your startup folder, press `Windows+R`, type `shell:startup`, and press enter
+* To get to your startup folder, press `Windows+R`, type `shell:startup`, and press enter
 
 ## Compiling
 
