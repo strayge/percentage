@@ -125,7 +125,7 @@ namespace CpuIcon
 
         public override void IconMouseClickAction()
         {
-            Task task = Task.Run((Action)CalcAndShowBaloonInBackground);
+            // Task task = Task.Run((Action)CalcAndShowBaloonInBackground);
         }
 
         static List<Tuple<string, float>> GetCpuTopProcesses()

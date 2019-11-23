@@ -11,7 +11,7 @@ Different icons for:
 - network I/O
 - disk I/O
 
-Single click uppon CPU / Memory icons open balloon with top processes.  
+Single click uppon Memory icons open balloon with top processes.  
 <img src="https://raw.githubusercontent.com/strayge/tray-monitor/master/screenshots/balloon.png" width=50%>
 
 Double clicks opens Task Manager / Resource Monitor.
@@ -29,4 +29,4 @@ All colors, update intervals and some other parameters can be changed via GUI se
 
 ## Compiling
 
-This project was compiled with Visual Studio 2017.
+This project was compiled with Visual Studio 2019.
