@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?define Version = "2.3.0" ?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="TrayMonitor" Language="1033" Version="$(var.Version)" Manufacturer="strayge" UpgradeCode="2dba2c1a-5719-4146-9326-959ec8d0f230">
+
+    <Package InstallerVersion="400" Compressed="yes" InstallScope="perMachine" />
+
+
+    <Icon Id="Icon" SourceFile="..\CpuIcon\CpuIcon.ico" />
+
+    <!-- Set properties for add/remove programs -->
+    <Property Id="ARPPRODUCTICON" Value="Icon" />
+    <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />  <!-- Remove repair -->
+    <!--<Property Id="ARPNOMODIFY" Value="yes" Secure="yes" />  --><!-- Remove modify -->
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Feature Id="CoreFeature" Title="Apps" Level="1" Absent="disallow">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+
+    <Feature Id="DesktopFeature" Title="Desktop links" Level="1">
+      <ComponentGroupRef Id="ComponentGroupDesktopShortcut" />
+    </Feature>
+
+    <Feature Id="StartFeature" Title="Start menu links" Level="1">
+      <ComponentGroupRef Id="ComponentGroupStartShortcut" />
+    </Feature>
+
+
+    <!-- Add CheckBox UI to your installer for running application on exit-->
+    <UI>
+      <Publish Dialog="WinUI_ExitDialogCustom" Control="Finish" Event="DoAction" Value="PrepLaunchBattery">WIXUI_EXITDIALOGOPTIONALCHECKBOX1 = 1 and NOT Installed</Publish>
+      <Publish Dialog="WinUI_ExitDialogCustom" Control="Finish" Event="DoAction" Value="LaunchBattery">WIXUI_EXITDIALOGOPTIONALCHECKBOX1 = 1 and NOT Installed</Publish>
+      
+      <Publish Dialog="WinUI_ExitDialogCustom" Control="Finish" Event="DoAction" Value="PrepLaunchCpu">WIXUI_EXITDIALOGOPTIONALCHECKBOX2 = 1 and NOT Installed</Publish>
+      <Publish Dialog="WinUI_ExitDialogCustom" Control="Finish" Event="DoAction" Value="LaunchCpu">WIXUI_EXITDIALOGOPTIONALCHECKBOX2 = 1 and NOT Installed</Publish>
+      
+      <Publish Dialog="WinUI_ExitDialogCustom" Control="Finish" Event="DoAction" Value="PrepLaunchMemory">WIXUI_EXITDIALOGOPTIONALCHECKBOX3 = 1 and NOT Installed</Publish>
+      <Publish Dialog="WinUI_ExitDialogCustom" Control="Finish" Event="DoAction" Value="LaunchMemory">WIXUI_EXITDIALOGOPTIONALCHECKBOX3 = 1 and NOT Installed</Publish>
+      
+      <Publish Dialog="WinUI_ExitDialogCustom" Control="Finish" Event="DoAction" Value="PrepLaunchNetwork">WIXUI_EXITDIALOGOPTIONALCHECKBOX4 = 1 and NOT Installed</Publish>
+      <Publish Dialog="WinUI_ExitDialogCustom" Control="Finish" Event="DoAction" Value="LaunchNetwork">WIXUI_EXITDIALOGOPTIONALCHECKBOX4 = 1 and NOT Installed</Publish>
+      
+      <Publish Dialog="WinUI_ExitDialogCustom" Control="Finish" Event="DoAction" Value="PrepLaunchDisk">WIXUI_EXITDIALOGOPTIONALCHECKBOX5 = 1 and NOT Installed</Publish>
+      <Publish Dialog="WinUI_ExitDialogCustom" Control="Finish" Event="DoAction" Value="LaunchDisk">WIXUI_EXITDIALOGOPTIONALCHECKBOX5 = 1 and NOT Installed</Publish>
+    </UI>
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT1" Value="Launch BatteryIcon" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT2" Value="Launch CpuIcon" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT3" Value="Launch MemoryIcon" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT4" Value="Launch NetworkIcon" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT5" Value="Launch DiskIcon" />
+
+    <!--Custom UI for installer-->
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <UIRef Id="WixUI_Custom" />
+
+
+    <CustomAction Id="PrepLaunchBattery" Property="WixShellExecTarget" Value="[#BatteryIcon.exe]" />
+    <CustomAction Id="LaunchBattery" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+
+    <CustomAction Id="PrepLaunchCpu" Property="WixShellExecTarget" Value="[#CpuIcon.exe]" />
+    <CustomAction Id="LaunchCpu" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+
+    <CustomAction Id="PrepLaunchMemory" Property="WixShellExecTarget" Value="[#RamIcon.exe]" />
+    <CustomAction Id="LaunchMemory" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+
+    <CustomAction Id="PrepLaunchNetwork" Property="WixShellExecTarget" Value="[#NetIcon.exe]" />
+    <CustomAction Id="LaunchNetwork" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+
+    <CustomAction Id="PrepLaunchDisk" Property="WixShellExecTarget" Value="[#DiskIcon.exe]" />
+    <CustomAction Id="LaunchDisk" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+
+
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="TrayMonitor">
+          <Directory Id="DesktopFolder" Name="DesktopFolder" />
+          <Directory Id="ProgramMenuFolder">
+            <Directory Id="StartMenu" Name="TrayMonitor" />
+          </Directory>
+        </Directory>
+      </Directory>
+
+      <!--<Directory Id="ProgramMenuFolder">
+        <Directory Id="StartMenu" Name="TrayMonitor" />
+      </Directory>-->
+      
+    </Directory>
+  </Fragment>
+
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="BatteryIcon" Guid="*">
+        <File Id="BatteryIcon.exe" Source="..\..\bin\Release\BatteryIcon.exe" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="CpuIcon" Guid="*">
+        <File Id="CpuIcon.exe" Source="..\..\bin\Release\CpuIcon.exe" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="DiskIcon" Guid="*">
+        <File Id="DiskIcon.exe" Source="..\..\bin\Release\DiskIcon.exe" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="NetIcon" Guid="*">
+        <File Id="NetIcon.exe" Source="..\..\bin\Release\NetIcon.exe" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="RamIcon" Guid="*">
+        <File Id="RamIcon.exe" Source="..\..\bin\Release\RamIcon.exe" KeyPath="yes" Checksum="yes"/>
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <!--Desktop Shortcut-->
+    <ComponentGroup Id="ComponentGroupDesktopShortcut">
+      <Component Id="ComponentDesktopShortcut" Guid="5a2e7e3d-a91f-4aaf-916f-e9175cc0d7fd" Directory="DesktopFolder" >
+        <Shortcut Id="AppDesktopShortcut1" Name="BatteryIcon" Directory="DesktopFolder" Target="[#BatteryIcon.exe]" WorkingDirectory="INSTALLFOLDER" />
+        <Shortcut Id="AppDesktopShortcut2" Name="CpuIcon" Directory="DesktopFolder" Target="[#CpuIcon.exe]" WorkingDirectory="INSTALLFOLDER"/>
+        <Shortcut Id="AppDesktopShortcut3" Name="DiskIcon" Directory="DesktopFolder" Target="[#DiskIcon.exe]" WorkingDirectory="INSTALLFOLDER"/>
+        <Shortcut Id="AppDesktopShortcut4" Name="NetIcon" Directory="DesktopFolder" Target="[#NetIcon.exe]" WorkingDirectory="INSTALLFOLDER"/>
+        <Shortcut Id="AppDesktopShortcut5" Name="RamIcon" Directory="DesktopFolder" Target="[#RamIcon.exe]" WorkingDirectory="INSTALLFOLDER"/>
+        <!--Remove desktop shortcut on uninstall-->
+        <RemoveFolder Id="DesktopFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\strayge\TrayMonitor" Name="installed_desktop" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+
+  <Fragment>
+    <!--Start Shortcut-->
+    <ComponentGroup Id="ComponentGroupStartShortcut">
+      <Component Id="ComponentStartShortcut" Guid="8552595d-6b8c-4693-8304-2cf9eb3e6b50" Directory="StartMenu" >
+        <Shortcut Id="AppDesktopShortcut6" Name="BatteryIcon" Directory="DesktopFolder" Target="[#BatteryIcon.exe]" WorkingDirectory="INSTALLFOLDER" />
+        <Shortcut Id="AppDesktopShortcut7" Name="CpuIcon" Directory="DesktopFolder" Target="[#CpuIcon.exe]" WorkingDirectory="INSTALLFOLDER"/>
+        <Shortcut Id="AppDesktopShortcut8" Name="DiskIcon" Directory="DesktopFolder" Target="[#DiskIcon.exe]" WorkingDirectory="INSTALLFOLDER"/>
+        <Shortcut Id="AppDesktopShortcut9" Name="NetIcon" Directory="DesktopFolder" Target="[#NetIcon.exe]" WorkingDirectory="INSTALLFOLDER"/>
+        <Shortcut Id="AppDesktopShortcut10" Name="RamIcon" Directory="DesktopFolder" Target="[#RamIcon.exe]" WorkingDirectory="INSTALLFOLDER"/>
+        <!--Remove desktop shortcut on uninstall-->
+        <RemoveFolder Id="StartMenu" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\strayge\TrayMonitor" Name="installed_start" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+  </Fragment>
+  
+
+  <!--<Fragment>
+    <DirectoryRef Id="DIR_Shortcuts">
+    <ComponentGroup Id="StartMenuLinks" Directory="StartMenu">
+      <Component Id="StartBattery" Guid="5a2e7e3d-a91f-4aaf-916f-e9175cc0d7fd">
+        <Shortcut Id="StartBatteryLink" Name="BatteryIcon" Description="Tray icon for battery percentage" Target="[#BatteryIcon.exe]" WorkingDirectory="INSTALLFOLDER" />
+        <RemoveFolder Id="StartMenu" On="uninstall" />
+      </Component>
+      <Component Id="StartCpu" Guid="8552595d-6b8c-4693-8304-2cf9eb3e6b50">
+        <Shortcut Id="StartCpuLink" Name="CpuIcon" Description="Tray icon for CPU usage" Target="[#CpuIcon.exe]" WorkingDirectory="INSTALLFOLDER" />
+      </Component>
+      <Component Id="StartDisk" Guid="3acb3c53-2a8e-4718-a55b-a35ca9e0740d">
+        <Shortcut Id="StartDiskLink" Name="DiskIcon" Description="Tray icon for disk usage" Target="[#DiskIcon.exe]" WorkingDirectory="INSTALLFOLDER" />
+      </Component>
+      <Component Id="StartNet" Guid="aa09ffce-842f-4987-b9e7-3b5415e45da2">
+        <Shortcut Id="StartNetLink" Name="NetIcon" Description="Tray icon for network usage" Target="[#NetIcon.exe]" WorkingDirectory="INSTALLFOLDER" />
+      </Component>
+      <Component Id="StartRam" Guid="14e6f5de-e2f2-41e4-b93c-de8fd7452898">
+        <Shortcut Id="StartRamLink" Name="RamIcon" Description="Tray icon for memory usage" Target="[#RamIcon.exe]" WorkingDirectory="INSTALLFOLDER" />
+      </Component>
+    </ComponentGroup>
+    </DirectoryRef>
+  </Fragment>-->
+  
+
+  <!--<Fragment>
+    <DirectoryRef Id="StartMenu">
+      --><!--Create application shortcut in Program Menu--><!--
+      <Component Id="StartBattery" Guid="5a2e7e3d-a91f-4aaf-916f-e9175cc0d7fd">
+        <Shortcut Id="StartBatteryLink" Name="BatteryIcon" Description="Tray icon for battery percentage" Target="[#BatteryIcon.exe]" WorkingDirectory="INSTALLFOLDER" />
+        <RemoveFolder Id="StartMenu" On="uninstall" />
+      </Component>
+      <Component Id="StartCpu" Guid="8552595d-6b8c-4693-8304-2cf9eb3e6b50">
+        <Shortcut Id="StartCpuLink" Name="CpuIcon" Description="Tray icon for CPU usage" Target="[#CpuIcon.exe]" WorkingDirectory="INSTALLFOLDER" />
+      </Component>
+      <Component Id="StartDisk" Guid="3acb3c53-2a8e-4718-a55b-a35ca9e0740d">
+        <Shortcut Id="StartDiskLink" Name="DiskIcon" Description="Tray icon for disk usage" Target="[#DiskIcon.exe]" WorkingDirectory="INSTALLFOLDER" />
+      </Component>
+      <Component Id="StartNet" Guid="aa09ffce-842f-4987-b9e7-3b5415e45da2">
+        <Shortcut Id="StartNetLink" Name="NetIcon" Description="Tray icon for network usage" Target="[#NetIcon.exe]" WorkingDirectory="INSTALLFOLDER" />
+      </Component>
+      <Component Id="StartRam" Guid="14e6f5de-e2f2-41e4-b93c-de8fd7452898">
+        <Shortcut Id="StartRamLink" Name="RamIcon" Description="Tray icon for memory usage" Target="[#RamIcon.exe]" WorkingDirectory="INSTALLFOLDER" />
+      </Component>
+    </DirectoryRef>
+  </Fragment>-->
+  
+
+</Wix>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (c) .NET Foundation and contributors. All rights reserved. Licensed under the Microsoft Reciprocal License. See LICENSE.TXT file in the project root for full license information. -->
+
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <UI>
+            <Dialog Id="WinUI_ExitDialogCustom" Width="370" Height="270" Title="!(loc.ExitDialog_Title)">
+                <Control Id="Finish" Type="PushButton" X="236" Y="243" Width="56" Height="17" Default="yes" Cancel="yes" Text="!(loc.WixUIFinish)" />
+                <Control Id="Cancel" Type="PushButton" X="304" Y="243" Width="56" Height="17" Disabled="yes" Text="!(loc.WixUICancel)" />
+                <Control Id="Bitmap" Type="Bitmap" X="0" Y="0" Width="370" Height="234" TabSkip="no" Text="!(loc.ExitDialogBitmap)" />
+                <Control Id="Back" Type="PushButton" X="180" Y="243" Width="56" Height="17" Disabled="yes" Text="!(loc.WixUIBack)" />
+                <Control Id="BottomLine" Type="Line" X="0" Y="234" Width="370" Height="0" />
+                <Control Id="Description" Type="Text" X="135" Y="70" Width="220" Height="40" Transparent="yes" NoPrefix="yes" Text="!(loc.ExitDialogDescription)" />
+                <Control Id="Title" Type="Text" X="135" Y="20" Width="220" Height="60" Transparent="yes" NoPrefix="yes" Text="!(loc.ExitDialogTitle)" />
+                <Control Id="OptionalText" Type="Text" X="135" Y="110" Width="220" Height="80" Transparent="yes" NoPrefix="yes" Hidden="yes" Text="[WIXUI_EXITDIALOGOPTIONALTEXT]">
+                    <Condition Action="show">WIXUI_EXITDIALOGOPTIONALTEXT AND NOT Installed</Condition>
+                </Control>
+                
+				<Control Id="OptionalCheckBox1" Type="CheckBox" X="135" Y="203" Width="90" Height="18" Hidden="yes" Property="WIXUI_EXITDIALOGOPTIONALCHECKBOX1" CheckBoxValue="1" Text="[WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT1]">
+                    <Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT1 AND NOT Installed</Condition>
+                </Control>
+				
+				<Control Id="OptionalCheckBox2" Type="CheckBox" X="135" Y="181" Width="90" Height="18" Hidden="yes" Property="WIXUI_EXITDIALOGOPTIONALCHECKBOX2" CheckBoxValue="1" Text="[WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT2]">
+                    <Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT2 AND NOT Installed</Condition>
+                </Control>
+				
+				<Control Id="OptionalCheckBox3" Type="CheckBox" X="135" Y="159" Width="90" Height="18" Hidden="yes" Property="WIXUI_EXITDIALOGOPTIONALCHECKBOX3" CheckBoxValue="1" Text="[WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT3]">
+					<Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT3 AND NOT Installed</Condition>
+				</Control>
+				
+				<Control Id="OptionalCheckBox4" Type="CheckBox" X="135" Y="137" Width="90" Height="18" Hidden="yes" Property="WIXUI_EXITDIALOGOPTIONALCHECKBOX4" CheckBoxValue="1" Text="[WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT4]">
+					<Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT4 AND NOT Installed</Condition>
+				</Control>
+				
+				<Control Id="OptionalCheckBox5" Type="CheckBox" X="135" Y="115" Width="90" Height="18" Hidden="yes" Property="WIXUI_EXITDIALOGOPTIONALCHECKBOX5" CheckBoxValue="1" Text="[WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT5]">
+					<Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT5 AND NOT Installed</Condition>
+				</Control>
+				
+				<Control Id="OptionalCheckBox6" Type="CheckBox" X="245" Y="203" Width="100" Height="18" Hidden="yes" Property="WIXUI_EXITDIALOGOPTIONALCHECKBOX6" CheckBoxValue="1" Text="[WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT6]">
+					<Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT6 AND NOT Installed</Condition>
+				</Control>
+				
+				<Control Id="OptionalCheckBox7" Type="CheckBox" X="245" Y="181" Width="100" Height="18" Hidden="yes" Property="WIXUI_EXITDIALOGOPTIONALCHECKBOX7" CheckBoxValue="1" Text="[WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT7]">
+					<Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT7 AND NOT Installed</Condition>
+				</Control>
+				
+				<Control Id="OptionalCheckBox8" Type="CheckBox" X="245" Y="159" Width="100" Height="18" Hidden="yes" Property="WIXUI_EXITDIALOGOPTIONALCHECKBOX8" CheckBoxValue="1" Text="[WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT8]">
+					<Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT8 AND NOT Installed</Condition>
+				</Control>
+				
+				<Control Id="OptionalCheckBox9" Type="CheckBox" X="245" Y="137" Width="100" Height="18" Hidden="yes" Property="WIXUI_EXITDIALOGOPTIONALCHECKBOX9" CheckBoxValue="1" Text="[WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT9]">
+					<Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT9 AND NOT Installed</Condition>
+				</Control>
+				
+				<Control Id="OptionalCheckBox10" Type="CheckBox" X="245" Y="115" Width="100" Height="18" Hidden="yes" Property="WIXUI_EXITDIALOGOPTIONALCHECKBOX10" CheckBoxValue="1" Text="[WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT10]">
+					<Condition Action="show">WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT10 AND NOT Installed</Condition>
+				</Control>
+				
+            </Dialog>
+
+            <InstallUISequence>
+                <Show Dialog="WinUI_ExitDialogCustom" OnExit="success" Overridable="yes" />
+            </InstallUISequence>
+
+            <AdminUISequence>
+                <Show Dialog="WinUI_ExitDialogCustom" OnExit="success" Overridable="yes" />
+            </AdminUISequence>
+        </UI>
+    </Fragment>
+</Wix>
