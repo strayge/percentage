@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Drawing;
 
-namespace IconLibrary
+namespace TrayIconLibrary
 {
     class Settings<T> where T : Settings<T>, new()
     {

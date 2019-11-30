@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 
-namespace IconLibrary
+namespace TrayIconLibrary
 {
     static class Autostart
     {

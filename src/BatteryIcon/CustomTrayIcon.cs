@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Diagnostics;
-using IconLibrary;
+using TrayIconLibrary;
 
 namespace BatteryIcon
 {

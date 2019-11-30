@@ -1,4 +1,4 @@
-﻿using IconLibrary;
+﻿using TrayIconLibrary;
 using System;
 using System.Windows.Forms;
 

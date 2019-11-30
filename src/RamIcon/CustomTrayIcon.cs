@@ -4,7 +4,7 @@ using System.Linq;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
-using IconLibrary;
+using TrayIconLibrary;
 using static TrayIconLibrary.WinApi;
 
 namespace RamIcon

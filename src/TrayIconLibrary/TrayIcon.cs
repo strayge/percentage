@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using TrayIconLibrary;
 
-namespace IconLibrary
+namespace TrayIconLibrary
 {
     class TrayIcon
     {

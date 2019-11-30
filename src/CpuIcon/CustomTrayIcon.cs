@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Diagnostics;
-using IconLibrary;
+using TrayIconLibrary;
 using System.Management;
 
 namespace CpuIcon

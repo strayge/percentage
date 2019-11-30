@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
-using TrayIconLibrary;
 
-namespace IconLibrary
+namespace TrayIconLibrary
 {
     public class Utils
     {

@@ -1,8 +1,7 @@
 ﻿using System.IO;
 using System.Text;
-using TrayIconLibrary;
 
-namespace IconLibrary
+namespace TrayIconLibrary
 {
     class IniFile
     {

@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using System.Drawing;
-using IconLibrary;
+using TrayIconLibrary;
 
 namespace DiskIcon
 {
