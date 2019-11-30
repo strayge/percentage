@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Autostart.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CachedStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IniFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Registry.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TrayIcon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utils.cs" />

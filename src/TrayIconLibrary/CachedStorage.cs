@@ -6,14 +6,23 @@ namespace TrayIconLibrary
 {
     class CachedStorage
     {
-        private IniFile storage;
+        private AbstractStorage storage;
 
         // cache for readed values
         private Dictionary<string, string> cache;
 
         public CachedStorage()
         {
-            storage = new IniFile("settings.ini");
+            String file_path = "settings.ini";
+            String registry_path = "HKEY_CURRENT_USER\\SOFTWARE\\strayge\\TrayMonitor";
+            if (File.Exists(file_path))
+            {
+                storage = new IniFile(file_path);
+            }
+            else
+            {
+                storage = new RegistryStorage(registry_path);
+            }
             cache = new Dictionary<string, string>();
         }
 

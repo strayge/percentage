@@ -3,7 +3,13 @@ using System.Text;
 
 namespace TrayIconLibrary
 {
-    class IniFile
+    abstract class AbstractStorage
+    {
+        public abstract string ReadString(string Section, string Key);
+        public abstract void WriteString(string Section, string Key, string Value);
+    }
+
+    class IniFile: AbstractStorage
     {
         string Path;
 
@@ -12,14 +18,14 @@ namespace TrayIconLibrary
             Path = new FileInfo(IniPath).FullName.ToString();
         }
 
-        public string ReadString(string Section, string Key)
+        public override string ReadString(string Section, string Key)
         {
             var RetVal = new StringBuilder(255);
             WinApi.GetPrivateProfileString(Section, Key, "", RetVal, 255, Path);
             return RetVal.ToString();
         }
 
-        public void WriteString(string Section, string Key, string Value)
+        public override void WriteString(string Section, string Key, string Value)
         {
             WinApi.WritePrivateProfileString(Section, Key, Value, Path);
         }
