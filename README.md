@@ -22,9 +22,8 @@ All colors, update intervals and some other parameters can be changed via GUI se
 ## Installing
 
 * [Download the latest release](https://github.com/strayge/tray-monitor/releases)
-* Copy needed icons to any folder (contains `BatteryIcon.exe`, `CpuIcon.exe`, `DiskIcon.exe`, `NetIcon.exe`, `RamIcon.exe`)
-  * all settings will be saved to the same folder to `settings.ini`
-* To enable autostart just right click uppon icon and check `Autostart`  
+* run .exe installer
+* To enable/disable autostart just right click uppon icon
 <img src="https://raw.githubusercontent.com/strayge/tray-monitor/master/screenshots/menu.png" width=20%>
 
 ## Compiling
