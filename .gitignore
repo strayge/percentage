@@ -288,10 +288,3 @@ __pycache__/
 *.xsd.cs
 /.vscode
 /todo.md
-
-# generated images
-/src/UWP_BatteryIcon/Images/*.png
-/src/UWP_CpuIcon/Images/*.png
-/src/UWP_DiskIcon/Images/*.png
-/src/UWP_NetIcon/Images/*.png
-/src/UWP_RamIcon/Images/*.png

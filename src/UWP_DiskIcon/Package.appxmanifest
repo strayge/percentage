@@ -9,7 +9,7 @@
   <Identity
     Name="48600strayge.DiskTrayMonitor"
     Publisher="CN=05C24DF2-D780-4E91-9DFB-8E1FE643AC80"
-    Version="1.0.0.0" />
+    Version="1.0.1.0" />
 
   <Properties>
     <DisplayName>Disk Tray Monitor</DisplayName>
