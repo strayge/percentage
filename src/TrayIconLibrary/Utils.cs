@@ -26,13 +26,13 @@ namespace TrayIconLibrary
 
         public static void StartProgram(string path, string args = "")
         {
-            ProcessStartInfo startInfo = new ProcessStartInfo();
+            //ProcessStartInfo startInfo = new ProcessStartInfo();
             //startInfo.CreateNoWindow = false;
-            startInfo.UseShellExecute = true;
-            startInfo.FileName = path;
+            //startInfo.UseShellExecute = true;
+            //startInfo.FileName = path;
             //startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            startInfo.Arguments = args;
-            Process exeProcess = Process.Start(startInfo);
+            //startInfo.Arguments = args;
+            //Process exeProcess = Process.Start(startInfo);
         }
 
         public static int CpuFreqMhz(int numIterations = 10000)
